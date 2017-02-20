@@ -1,0 +1,11 @@
+.container-full {
+    width: 100;
+    position: relative;
+
+    .container-grid {
+        @include gridContainer();
+        font-family: $font__text--regular;
+        font-size: rem(25);
+        color: $color__black;
+    }
+}

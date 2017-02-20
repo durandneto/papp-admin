@@ -1,0 +1,134 @@
+//alphas
+@mixin alpha($alpha01, $alpha02, $alpha03, $alpha04, $alpha05) {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=$alpha01)";
+    filter: alpha(opacity=$alpha02);
+    -moz-opacity: $alpha03;
+    -khtml-opacity: $alpha04;
+    opacity: $alpha05;
+    zoom: 1;
+}
+
+@mixin gridContainer() {
+    width: 85%;
+    margin: 0 auto;
+    @media only screen and (min-width: 450px) and (max-width: 1920px) {
+        width: 90%;
+    }
+    @media only screen and (min-width: 0px) and (max-width: 449px) {
+        width: 85%;
+    }
+}
+
+@mixin linkStyle() {
+    a {
+        font-family: $font__text--regular;
+        text-decoration: none;
+        border-bottom: rem(1) solid transparent;
+        padding-bottom: rem(3);
+        transition: border-color 210ms ease;
+        white-space: nowrap;
+        &:hover {
+            border-bottom: rem(1) solid $color__purple;
+            padding-bottom: rem(3);
+            transition: border-color 210ms ease;
+        }
+    }
+}
+
+@mixin colorLogoOi($colorOi, $colorAmeba) {
+    .oi {
+        fill: $colorOi !important;
+    }
+    .ameba {
+        fill: $colorAmeba !important;
+    }
+}
+
+@mixin colorRedeSocial($colorRedeSocial) {
+    svg {
+        fill: $colorRedeSocial !important;
+    }
+    &:hover {
+        color: $colorRedeSocial;
+    }
+}
+
+@mixin buttonBG($colorBG) {
+    background-color: $colorBG !important;
+}
+
+@mixin linkThemeHeader($colorLink) {
+    & li {
+        & a {
+            color: $colorLink !important;
+            &:hover {
+                border-bottom: rem(1) solid $colorLink !important;
+            }
+        }
+    }
+}
+
+@mixin LinkThemeFooter($colorLink) {
+    & .footer__category__title,
+    .footer__category__item {
+        & a {
+            &:hover {
+                color: $colorLink !important;
+            }
+        }
+    }
+    & .footer__institucional__nav__item {
+        & a {
+            &:hover {
+                color: $colorLink !important;
+            }
+        }
+    }
+}
+
+@mixin buttonHover() {
+    display: block;
+    border-bottom: 0;
+    border-radius: rem(3);
+    padding: rem(45) rem(90);
+    text-decoration: none;
+    font-family: $font__text--regular;
+    font-size: rem(30);
+    @media only screen and (min-width: 450px) and (max-width: 1920px) {
+        padding: rem(20) rem(35);
+        font-size: rem(20);
+    }
+}
+
+@mixin az() {
+    font-family: $font__text--regular;
+    text-decoration: none;
+    border-radius: rem(3);
+    padding: rem(27) rem(90);
+    font-size: rem(30);
+    @media only screen and (min-width: 0px) and (max-width: 450px) {
+        font-size: rem(16);
+        width: 100%;
+        text-align: center;
+        border-radius: rem(0);
+    }
+    @media only screen and (min-width: 450px) and (max-width: 1920px) {
+        font-size: rem(16);
+        padding: rem(18) rem(50);
+    }
+}
+
+@mixin modalMobile() {
+    background-color: $color__purple;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 100%;
+    opacity: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: background-color 210ms ease;
+}

@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+// converter rem
+$browser-context: 16;
+@function rem($pixels, $context: $browser-context) {
+    @if (unitless($pixels)) {
+        $pixels: $pixels * 1px;
+    }
+    @if (unitless($context)) {
+        $context: $context * 1px;
+    }
+    @return $pixels / $context * 1rem;
+}
+
+
+
+// Grid HOME
+$size_h_xs: 320px;
+$size_h_s: 414px;
+$size_h_m_s: 768px;
+$size_h_m_s_767: 767px;
+$size_h_m: 960px;
+$size_h_l: 1023px;
+$size_h__xl: 1280px;
+$size_h__xl_1366: 1366px;
+
+
+// Grid
+$size__xs: 320px;
+$size__s: 414px;
+$size__m: 734px;
+$size__l: 1024px;
+$size__xl: 1250px;
+$size__xxl:  1920px;
+$size__xxxl: 2340px;
+$size__4k: 3200px;
+
+$media__xs: min-width $size__xs; // 320
+$media__s: min-width $size__s; // 414
+$media__m: min-width $size__m; // 768
+$media__l: min-width $size__l; // 1024
+$media__xl: min-width $size__xl; // 1250
+$media__xxl: min-width $size__xxl; // 1920
+$media__xxxl: min-width $size__xxxl; // 2560
+$media__4k: min-width $size__4k; // 3200
+
+$media__down__xs: max-width $size__s - 1; // 320
+$media__down__s: max-width $size__m - 1; // 414
+$media__down__m: max-width $size__l - 1; // 768
+$media__down__l: max-width $size__xl - 1; // 1024
+$media__down__xl: max-width $size__xxl - 1; // 1250
+$media__down__xxl: max-width $size__xxxl - 1; // 1920
+$media__down__xxxl: max-width $size__4k - 1; // 2560
+
+$grid__size__xs: rem(280);
+$grid__size__s: rem(344);
+$grid__size__m: rem(704);
+$grid__size__l: rem(960);
+$grid__size__xl: rem(1170);
+
+$xs_fixed_gutter: 14px;
+$xs_fixed_width: 35px;
+$s_fixed_gutter: 5%;
+$s_fixed_width: 12.5%;
+$m_fixed_gutter: 16px;
+$m_fixed_width: 44px;
+$l_fixed_gutter: 24px;
+$l_fixed_width: 58px;
+$xl_fixed_gutter: 30px;
+$xl_fixed_width: 70px;
+
+$size-xs-negative-gap: rem(-20);
+$size-s-negative-gap: rem(-20);
+$size-m-negative-gap: calc((#{$grid__size__m} - 100vw) /2);
+$size-l-negative-gap: calc((#{$grid__size__l} - 100vw) /2);
+$size-xl-negative-gap: calc((#{$grid__size__xl} - 100vw) /2);
+
+$size-xs-positive-gap: rem(20);
+$size-s-positive-gap: rem(20);
+$size-m-positive-gap: calc((100vw - #{$grid__size__m}) /2);
+$size-l-positive-gap: calc((100vw - #{$grid__size__l}) /2);
+$size-xl-positive-gap: calc((100vw - #{$grid__size__xl}) /2);
+
+// Colors
+$color__white: #ffffff;
+$color__black: #222222;
+
+$color__gray: #909090;
+$color__gray--light: #dbdbdb;
+$color__gray--lighter: #f0f0f0;
+$color__gray--bright: #f5f5f5;
+
+//Purples
+$color__purple: #8F25E5;
+$color__purple--2: #900AE9;
+
+$color__purple--dark: #7A24CC;
+$color__purple--light: #BD0FE1;
+
+// Old brand colors
+$color__aqua: #00a596;
+$color__magenta: #8c3c8c;
+
+// New Brand Colors
+
+$color__blue: #009DF7;
+$color__pink: #C72177;
+$color__green: #00d213;
+$color__orange: #F8562C;
+$color__yellow: #F0C000;
+
+
+$color__alert--red: #ff0000;
+$color__alert--green: #47b969;
+
+$win-colors: (
+  #{$color__aqua}: #00998c,
+  #{$color__magenta}: #803780,
+  #{$color__purple}: #8f25e5,
+  #{$color__blue}: #009df7,
+  #{$color__pink}: #c72177,
+  #{$color__green}: #44cc00,
+  #{$color__orange}: #f8562c,
+  #{$color__yellow}: #f0c000
+);
+
+
+// Forms
+$formPaddingVertical: 1.125rem;
+$formPaddingHorizontal: 2.25rem;
+
+// Border
+$border-radius-width: rem(2);
+
+// Elements
+$cartHeightMobile: rem(80);
+$cartHeightDesktop: rem(100);
+
+
+@font-face {
+  font-family: oiTitle;
+  src: url(./fonts/simplon/simplonoi-headline-webfont.eot);
+  src: url(./fonts/simplon/simplonoi-headline-webfont.eot?#iefix) format("embedded-opentype"), url(./fonts/simplon/simplonoi-headline-webfont.woff) format("woff"), url(./fonts/simplon/simplonoi-headline-webfont.ttf) format("truetype"), url(./fonts/simplon/simplonoi-headline-webfont.svg#simplon_oiheadline) format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: oiTextRegular;
+  src: url(./fonts/simplon/simplonbp-regular-webfont.eot);
+  src: url(./fonts/simplon/simplonbp-regular-webfont.eot?#iefix) format("embedded-opentype"), url(./fonts/simplon/simplonbp-regular-webfont.woff) format("woff"), url(./fonts/simplon/simplonbp-regular-webfont.ttf) format("truetype"), url(./fonts/simplon/simplonbp-regular-webfont.svg#simplon_bpregular) format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: oiTextMedium;
+  src: url(./fonts/simplon/simplonbp-medium-webfont.eot);
+  src: url(./fonts/simplon/simplonbp-medium-webfont.eot?#iefix) format("embedded-opentype"), url(./fonts/simplon/simplonbp-medium-webfont.woff) format("woff"), url(./fonts/simplon/simplonbp-medium-webfont.ttf) format("truetype"), url(./fonts/simplon/simplonbp-medium-webfont.svg#simplon_bpmedium) format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: oiTextBold;
+  src: url(./fonts/simplon/simplonbp-bold-webfont.eot);
+  src: url(./fonts/simplon/simplonbp-bold-webfont.eot?#iefix) format("embedded-opentype"), url(./fonts/simplon/simplonbp-bold-webfont.woff) format("woff"), url(./fonts/simplon/simplonbp-bold-webfont.ttf) format("truetype"), url(./fonts/simplon/simplonbp-bold-webfont.svg#simplon_bpbold) format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: oiTextLight;
+  src: url(./fonts/simplon/simplonbp-light-webfont.eot);
+  src: url(./fonts/simplon/simplonbp-light-webfont.eot?#iefix) format("embedded-opentype"), url(./fonts/simplon/simplonbp-light-webfont.woff) format("woff"), url(./fonts/simplon/simplonbp-light-webfont.ttf) format("truetype"), url(./fonts/simplon/simplonbp-light-webfont.svg#simplon_light) format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+// Fonts
+$font__heading: 'oiTitle', sans-serif;
+$font__text--regular: 'oiTextRegular', sans-serif;
+$font__text--medium: 'oiTextMedium', sans-serif;
+$font__text--bold: 'oiTextBold', sans-serif;
+$font__text--light: 'oiTextLight', sans-serif;
+
+
