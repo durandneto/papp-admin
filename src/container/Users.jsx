@@ -4,13 +4,13 @@ import { bindActionCreators } from 'redux'
 
 import * as Actions from './../actions'
 
-import TableList from './../pages/TableList'
+import SimpleTable from './../pages/SimpleTable'
 
-class App extends Component {
+class Users extends Component {
 
   render() {
 	return (
-		<TableList
+		<SimpleTable
 			header={this.props.header}
 			show_mobile_menu={this.props.show_mobile_menu} />
 	);
@@ -29,5 +29,5 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch)
 }
 
-export { App }
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export { Users }
+export default connect(mapStateToProps, mapDispatchToProps)(Users)

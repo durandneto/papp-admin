@@ -5,7 +5,7 @@ import Header from './../organisms/Header'
 import Content from './../organisms/Content'
 import Footer from './../organisms/Footer'
 
-class Home extends Component {
+class HomeTemplate extends Component {
 
   render() {
 
@@ -23,5 +23,5 @@ class Home extends Component {
   }
 }
  
-export { Home }
-export default Home
+export { HomeTemplate }
+export default HomeTemplate

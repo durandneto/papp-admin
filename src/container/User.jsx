@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Button } from 'react-bootstrap'
 
 import * as Actions from './../actions'
 
-import { Home } from './../pages/Home'
+import TableList from './../pages/TableList'
 
-class App extends Component {
+class User extends Component {
 
   render() {
 	return (
-		<Home
+		<TableList
 			header={this.props.header}
-			show_mobile_menu={this.props.show_mobile_menu}>
-			<Button bsStyle="primary">Primary</Button>
-		</Home>
+			show_mobile_menu={this.props.show_mobile_menu} />
 	);
   }
 }
@@ -32,5 +29,5 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch)
 }
 
-export { App }
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export { User }
+export default connect(mapStateToProps, mapDispatchToProps)(User)

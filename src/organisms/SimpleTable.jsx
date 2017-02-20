@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Col } from 'react-bootstrap'
 
-class Table extends Component {
+class SimpleTable extends Component {
 
   render() {
     return (
@@ -123,5 +123,5 @@ class Table extends Component {
   }
 }  
 
-export { Table }
-export default Table
+export { SimpleTable }
+export default SimpleTable
