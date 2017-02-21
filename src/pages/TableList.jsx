@@ -6,7 +6,7 @@ class TableList extends Component {
 
   render() {
     return (
-    		<TemplateTableList header={this.props.header} show_mobile_menu={this.props.show_mobile_menu} > 
+    		<TemplateTableList {...this.props} > 
     			{ this.props.children }
     		</TemplateTableList>
     )

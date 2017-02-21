@@ -15,19 +15,25 @@ const createStoreWithMiddleware = applyMiddleware(
 
 let store = createStoreWithMiddleware(reducer)
 
-import User from './container/User'
+import Topics from './container/Topics'
+import Groups from './container/Groups'
+import Reports from './container/Reports'
+import Dashboard from './container/Dashboard'
 import Users from './container/Users'
 import App from './container/App' 
 import NoMatch from './container/NoMatch' 
 
 render((
   <Provider store={store}>
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Users}/>
-      <Route path="user/:userID" component={User} />
-    </Route>
-    <Route path="*" component={NoMatch} />
-  </Router>
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <Route path="users" component={Users} />
+        <Route path="topics" component={Topics} />
+        <Route path="groups" component={Groups} />
+        <Route path="reports" component={Reports} />
+        <IndexRoute component={Dashboard}/>
+      </Route>
+      <Route path="*" component={NoMatch} />
+    </Router>
   </Provider>
 ), document.getElementById('root'))

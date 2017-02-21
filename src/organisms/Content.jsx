@@ -10,16 +10,11 @@ class Content extends Component {
         <Col md={2}>
           <nav>
             <ul>
-              <li><Link to="/user/durand">user 1 </Link></li>
-              <li>
-                <Link to={{ pathname: '/user/bob', query: { showAge: true } }}>user 2</Link><br />
-              </li>
-              <li>
-                <Link to='/'>back</Link>
-              </li>
-              <li>
-                <Link disabled>Link 3 content</Link>
-              </li>
+              <li><Link to='/'>Dashboard</Link></li>
+              <li><Link to='/users'>Users</Link></li>
+              <li><Link to='/groups'>Groups</Link></li> 
+              <li><Link to='/topics'>Topics</Link></li>
+              <li><Link to='/reports'>Reports</Link></li>
             </ul>
           </nav>
         </Col>

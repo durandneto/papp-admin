@@ -1,29 +1,37 @@
 import React, { Component } from 'react'
-import { Grid } from 'react-bootstrap'
+import { Grid, Row, Col } from 'react-bootstrap'
 
 import Header from './../organisms/Header'
 import Content from './../organisms/Content'
-import TableList from './../organisms/TableList'
+import TableAction from './../organisms/TableAction'
 import Footer from './../organisms/Footer'
+import SimpleBreadcrumb from './../organisms/SimpleBreadcrumb'
 
-class TableListTemplate extends Component {
+class TableActionTemplate extends Component {
 
   render() {
-
-  	let { header, show_mobile_menu } = this.props
+  	let { header, show_mobile_menu, location, columns, data } = this.props
     return (
       	<Grid fluid={true}>
         	<Header data={header} show_mobile_menu={show_mobile_menu}/>
           <Content>
-          <TableList />
+            <Row>    
+              <Col md={12}>
+                <SimpleBreadcrumb location={location} />
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}> 
+                <TableAction columns={columns} data={data} />
+              </Col>
+            </Row>
             { this.props.children }          
           </Content>
         	<Footer />
         </Grid>
     );
-    
   }
 }
  
-export { TableListTemplate }
-export default TableListTemplate
+export { TableActionTemplate }
+export default TableActionTemplate

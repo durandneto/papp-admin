@@ -10,13 +10,12 @@ class TableListTemplate extends Component {
 
   render() {
 
-  	let { header, show_mobile_menu } = this.props
+  	let { header, show_mobile_menu, users } = this.props
     return (
     	<Grid fluid={true}>
       	<Header data={header} show_mobile_menu={show_mobile_menu}/>
         <Content>
-        <SimpleTable />
-          { this.props.children }          
+          <SimpleTable data={users} />
         </Content>
       	<Footer />
       </Grid>
