@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
+import { ButtonSquad } from '../atoms/Buttons'
+
 
 class ButtonContainer extends Component {
 
   render() {
     return (
       <div className='well'>
-        <a className="btn btn-primary"><i className="fa fa-fw -square -circle fa-plus-square"></i>+</a>
-        <a className="btn btn-default"><i className="fa fa-fw -square -circle fa-plus-square"></i>Fitler</a>
-        <a className="btn btn-default"><i className="fa fa-fw -square -circle fa-plus-square"></i>Export</a>
+	    <ButtonSquad type='primary' icon='fa-plus-square'/>
+	    <ButtonSquad label='Filter' />
+	    <ButtonSquad label='Export' />
       </div>
     );
 
