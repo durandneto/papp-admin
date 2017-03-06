@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 class ButtonDefault extends Component {
 
@@ -48,20 +49,20 @@ class ButtonAncor extends ButtonDefault {
 class ButtonSquad extends ButtonDefault {
 
   render() {
-     let { label, click, type, icon } = this.props
+     let { to, label, type, icon } = this.props
 
     type = (type) ? type : 'default';
     icon = (icon) ? icon : '';
 
     return ( 
-      <a  onClick={click}  className={`btn btn-${type}`}>
+      <Link  to={to} className={`btn btn-${type}`}>
       {
         icon ? <i className={`fa fa-fw -square -circle ${icon}`}></i> : null
       }
       {
         label
       }
-      </a>
+      </Link>
     )
   }
 }

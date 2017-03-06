@@ -5,14 +5,29 @@ import { ButtonLinkTableHeader, ButtonDefault } from './../atoms/Buttons'
 class TableList extends Component {
  
   _view(param) {
-    console.log('click',param)
+    this.props.callback('view')
   }
   _remove(param) {
-    console.log('click',param)
+    this.props.callback('remove')
   }
+  _next(param) {
+    this.props.callback('next')
+  }
+  _first(param) {
+    this.props.callback('first')
+  }
+  _last(param) {
+    this.props.callback('last')
+  }
+  _prev(param) {
+    this.props.callback('prev')
+  }
+
   render() {
     return (
       <table className="table table-striped table-hover">
+      {
+        this.props.columns && this.props.rows ? 
         <thead>
           <tr>
             {
@@ -28,10 +43,12 @@ class TableList extends Component {
               <ButtonLinkTableHeader label={'Options'} /> 
             </th>
           </tr>
-        </thead>
+        </thead> : null
+      }
         <tbody>
             {
-              this.props.data.map((value, index) => {
+            this.props.rows ?
+              this.props.rows.map((value, index) => {
                 return (
                   <tr data-index={index}  key={`datatablelistbody${index}`} >
                   { 
@@ -42,25 +59,42 @@ class TableList extends Component {
                     })
                   }
                     <td >
-                      <ButtonDefault icon="fa-eye" click={this._view.bind(this,2)}  />
+                      {/*<ButtonDefault icon="fa-eye" click={this._view.bind(this,2)}  />
                       <ButtonDefault icon="fa-ban" click={this._remove.bind(this,3)} />
+                    */}
+
+                    <span  onClick={this._view.bind(this,2)} > View </span>  
+                    <span  onClick={this._remove.bind(this,1)} > Remove </span>  
                     </td>
                   </tr>
                 )
-              })
-            }
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>
-              <Paginator current={1} limit={10} total={300} itemsPerPage={5} />
-            </td>
-          </tr>
-        </tfoot>
+              }) : <tr><td> no data found</td></tr>
+            } 
+        </tbody> 
+        {
+          this.props.rows ?
+            <tfoot>
+              <tr>
+                <td>
+                  <Paginator
+                    current={this.props.paginator.get('currentPage')}
+                    limit={this.props.paginator.get('totalPage')}
+                    total={this.props.paginator.get('count')}
+                    itemsPerPage={this.props.paginator.get('limitPerPage')}
+                    actionNext={this._next.bind(this)}
+                    actionPrev={this._prev.bind(this)}
+                    actionLast={this._last.bind(this)}
+                    actionFirst={this._first.bind(this)}
+                    allowNavigation={this.props.paginator.get('allowNavigation')}
+                     />
+                </td>
+              </tr>
+            </tfoot> : null
+        }
       </table>
-);
+    );
 
-}
   }  
+}
 
 export default TableList

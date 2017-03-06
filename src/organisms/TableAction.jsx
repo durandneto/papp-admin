@@ -11,7 +11,7 @@ class TableAction extends Component {
       <span>
         <Row>
           <Col md={12}>
-            <ButtonContainer />
+            <ButtonContainer {...this.props} />
           </Col>
         </Row>
         <Row>

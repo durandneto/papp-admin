@@ -14,7 +14,10 @@
     "sass-loader": "^6.0.1"
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
+    "humps": "^2.0.0",
     "immutable": "^3.8.1",
+    "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
@@ -22,7 +25,8 @@
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "superagent": "^3.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

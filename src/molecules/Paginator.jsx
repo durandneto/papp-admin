@@ -5,7 +5,12 @@ class Paginator extends Component {
 
   render() {
 
-  	let { current, total, itemsPerPage, limit } = this.props
+  	let { allowNavigation
+      , current
+      , total
+      , itemsPerPage
+      , limit 
+    } = this.props
 
     return (
       <div className="fixed-table-pagination">
@@ -29,17 +34,24 @@ class Paginator extends Component {
         </div>
         <div className="pull-right pagination" >
           <ul className="pagination">
-            <li className="page-first disabled"><ButtonAncor label='first' /></li>
-            <li className="page-pre disabled"><ButtonAncor label='prev' /></li>
-            <li className="page-number active "><ButtonAncor label={current} /></li>
-            <li className="page-next disabled"><ButtonAncor label='next' /></li>
-            <li className="page-last disabled"><ButtonAncor label='last' /></li> 
+            <li className={`page-first ${allowNavigation.get('prev') ? '' : 'disabled'} `}  
+              onClick={allowNavigation.get('prev') ? this.props.actionFirst : null} ><ButtonAncor label='first' /></li>
+
+            <li className={`page-pre  ${allowNavigation.get('prev') ? '' : 'disabled'}`} 
+               onClick={ allowNavigation.get('prev') ? this.props.actionPrev : null}><ButtonAncor label='prev' /></li>
+            
+            <li className={`page-number active`}><ButtonAncor label={current} /></li>
+            
+            <li className={`page-next  ${allowNavigation.get('next') ? '' : 'disabled'}`}
+               onClick={ allowNavigation.get('next') ? this.props.actionNext : null}><ButtonAncor label='next' /></li>
+            
+            <li className={`page-last  ${allowNavigation.get('next') ? '' : 'disabled'}`} 
+               onClick={allowNavigation.get('next') ? this.props.actionLast : null}><ButtonAncor label='last' /></li> 
           </ul>
         </div>
       </div>
     );
-
-}
   }  
+}
 
 export default Paginator

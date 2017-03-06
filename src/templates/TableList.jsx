@@ -9,8 +9,25 @@ import SimpleBreadcrumb from './../organisms/SimpleBreadcrumb'
 
 class TableActionTemplate extends Component {
 
+  _callback(type) {
+    let { 
+      reducer
+      , callback
+    } = this.props
+
+    callback(reducer,type)
+
+  }
+
   render() {
-  	let { header, show_mobile_menu, location, columns, data } = this.props
+  	
+    let { 
+      reducer
+      , header
+      , show_mobile_menu
+      , location
+    } = this.props
+
     return (
       	<Grid fluid={true}>
         	<Header data={header} show_mobile_menu={show_mobile_menu}/>
@@ -22,7 +39,12 @@ class TableActionTemplate extends Component {
             </Row>
             <Row>
               <Col md={12}> 
-                <TableAction columns={columns} data={data} />
+                <TableAction 
+                  path={reducer.get('path')}
+                  columns={reducer.get('data').get('columns')}
+                  rows={reducer.get('data').get('rows')}
+                  callback={this._callback.bind(this)} 
+                  paginator={reducer.get('paginator')} />
               </Col>
             </Row>
             { this.props.children }          
