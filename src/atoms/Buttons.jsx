@@ -49,13 +49,13 @@ class ButtonAncor extends ButtonDefault {
 class ButtonSquad extends ButtonDefault {
 
   render() {
-     let { to, label, type, icon, click } = this.props
+     let { to, label, type, icon } = this.props
 
     type = (type) ? type : 'default';
     icon = (icon) ? icon : '';
 
     return ( 
-      <Link  to={(to)?to:null}  click={(click)?click:null} className={`btn btn-${type}`}>
+      <Link  to={(to)?to:null} className={`btn btn-${type}`}>
       {
         icon ? <i className={`fa fa-fw -square -circle ${icon}`}></i> : null
       }

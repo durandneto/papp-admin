@@ -37,7 +37,7 @@ function appReducer (state = defaultState, action) {
   	case SEARCHED_USER:
   		let columns = null
   		let rows = null
-  		if ( action.response.users[0] ){
+  		if ( action.response.users ){
   			columns = Object.keys(action.response.users[0])
   			rows = action.response.users
   		}

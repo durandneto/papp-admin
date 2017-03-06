@@ -165,12 +165,14 @@ export function fetch_users(users, action) {
               }
             },
               (response) => {
+
                 return {
                   [CALL_API]: {
                     method: 'get',
                     type : 'external', 
                     path: '/user/count',
-                    successType: SEARCHED_USER_COUNT
+                    successType: SEARCHED_USER_COUNT,
+                    
                   }
                 }
               }
@@ -196,6 +198,8 @@ export function save_user(user) {
             successType: SEARCHED_USER
           }
         }
+      }, (response) => {
+        console.log(response)
       }
     ]
   }
