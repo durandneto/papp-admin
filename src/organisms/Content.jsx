@@ -1,29 +1,28 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, NavItem, Nav} from 'react-bootstrap'
 
 class Content extends Component {
 
   render() {
+
     return (
       <Row className="show-grid">    
         <Col md={2}>
-          <nav>
-            <ul>
-              <li><Link to='/'>Dashboard</Link></li>
-              <li><Link to='/users'>Users</Link></li>
-              <li><Link to='/groups'>Groups</Link></li> 
-              <li><Link to='/topics'>Topics</Link></li>
-              <li><Link to='/reports'>Reports</Link></li>
-            </ul>
-          </nav>
+          <Nav bsStyle="pills" stacked activeKey={this.props.location.pathname.split('/')[1]}>
+              <NavItem eventKey={''} ><Link to='/'>Dashboard</Link></NavItem>
+              <NavItem eventKey={'users'} ><Link to='/users'>Users</Link></NavItem>
+              <NavItem eventKey={'groups'} ><Link to='/groups'>Groups</Link></NavItem> 
+              <NavItem eventKey={'topics'} ><Link to='/topics'>Topics</Link></NavItem>
+              <NavItem eventKey={'reports'} ><Link to='/reports'>Reports</Link></NavItem>
+
+          </Nav>
         </Col>
         <Col md={10}>{ this.props.children }</Col>
       </Row>
     );
-
-}
   }  
+}
 
 export { Content }
 export default Content;

@@ -49,13 +49,13 @@ class ButtonAncor extends ButtonDefault {
 class ButtonSquad extends ButtonDefault {
 
   render() {
-     let { to, label, type, icon } = this.props
+     let { to, label, type, icon, click } = this.props
 
     type = (type) ? type : 'default';
     icon = (icon) ? icon : '';
 
     return ( 
-      <Link  to={to} className={`btn btn-${type}`}>
+      <Link  to={(to)?to:null}  click={(click)?click:null} className={`btn btn-${type}`}>
       {
         icon ? <i className={`fa fa-fw -square -circle ${icon}`}></i> : null
       }
@@ -67,8 +67,31 @@ class ButtonSquad extends ButtonDefault {
   }
 }
 
+class ButtonFormSquad extends ButtonDefault {
+
+  render() {
+     let { to, label, type, icon, click, className } = this.props
+
+    type = (type) ? type : 'default';
+    icon = (icon) ? icon : '';
+    className = (className) ? className : '';
+
+    return ( 
+      <span onClick={(click)?click:null} className={`btn btn-${type} ${className}`}>
+      {
+        icon ? <i className={`fa fa-fw -square -circle ${icon}`}></i> : null
+      }
+      {
+        label
+      }
+      </span>
+    )
+  }
+}
+
 export { ButtonDefault }
 export { ButtonLinkTableHeader }
+export { ButtonFormSquad }
 export { ButtonAncor }
 export { ButtonSquad }
 export default ButtonDefault 

@@ -183,3 +183,20 @@ export function fetch_users(users, action) {
     }
   }
 }
+export function save_user(user) {
+  return {
+    [CHAIN_API]: [
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'post',
+            type : 'external',
+            body: {name:user.full_name,email:user.email},
+            path: '/user/save',
+            successType: SEARCHED_USER
+          }
+        }
+      }
+    ]
+  }
+}

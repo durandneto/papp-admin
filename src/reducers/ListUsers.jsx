@@ -35,10 +35,16 @@ function appReducer (state = defaultState, action) {
 		 // eslint-disable-next-line
 		break
   	case SEARCHED_USER:
+  		let columns = null
+  		let rows = null
+  		if ( action.response.users[0] ){
+  			columns = Object.keys(action.response.users[0])
+  			rows = action.response.users
+  		}
 		return state.mergeDeep({
 			data: {
-				columns: Object.keys(action.response.users[0])
-				, rows: action.response.users
+				columns: columns
+				, rows: rows 
 				}
 				, isLoadded : true
 			})

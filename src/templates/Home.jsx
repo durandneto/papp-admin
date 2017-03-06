@@ -14,7 +14,7 @@ class HomeTemplate extends Component {
     return (
       <Grid fluid={true}>
         <Header data={header} show_mobile_menu={show_mobile_menu}/>
-        <Content>
+        <Content location={location} >
           <Row>    
             <Col md={12}>
               <SimpleBreadcrumb location={location} />
