@@ -59,12 +59,8 @@ class TableList extends Component {
                     })
                   }
                     <td >
-                      {/*<ButtonDefault icon="fa-eye" click={this._view.bind(this,2)}  />
+                     <ButtonDefault icon="fa-eye" click={this._view.bind(this,2)}  />
                       <ButtonDefault icon="fa-ban" click={this._remove.bind(this,3)} />
-                    */}
-
-                    <span  onClick={this._view.bind(this,2)} > View </span>  
-                    <span  onClick={this._remove.bind(this,1)} > Remove </span>  
                     </td>
                   </tr>
                 )

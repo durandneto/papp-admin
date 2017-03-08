@@ -99,7 +99,7 @@ export function fetch_users(users, action) {
   let limit = users.get('paginator').get('limitPerPage')
   let total = users.get('paginator').get('totalPage')
   let page = users.get('paginator').get('currentPage')
-  let count = users.get('paginator').get('count')
+  // let count = users.get('paginator').get('count')
   let search = true;
   let allowNavigation = {
       next : true
@@ -119,6 +119,7 @@ export function fetch_users(users, action) {
       allowNavigation.prev = ( page > 1 )
       search = (page >= 1)
       break
+      // eslint-disable-next-line
       search = (page !== total)
     case action === 'first':
 
@@ -145,6 +146,7 @@ export function fetch_users(users, action) {
       }
 
       break
+    default:
   }
 
   return (dispatch) => {

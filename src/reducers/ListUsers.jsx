@@ -1,5 +1,5 @@
-import { SHOW_MOBILE_MENU
-	, SEARCHED_USER
+import { 
+	SEARCHED_USER
 	, USER_SET_PAGE
 	, SEARCHED_USER_COUNT } from '../actions'
 import Immutable from 'immutable'

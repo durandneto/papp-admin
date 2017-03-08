@@ -77,7 +77,7 @@ class ButtonFormSquad extends ButtonDefault {
     className = (className) ? className : '';
 
     return ( 
-      <span onClick={(click)?click:null} className={`btn btn-${type} ${className}`}>
+      <span onClick={(click) ? click : null} className={`btn btn-${type} ${className}`}>
       {
         icon ? <i className={`fa fa-fw -square -circle ${icon}`}></i> : null
       }

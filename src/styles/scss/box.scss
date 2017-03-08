@@ -1,9 +1,34 @@
-.box-normal {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 200px;
-	height: 200px;
-	background-color:gray;
-	text-align:rigth
+.box {
+	.box-normal {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 200px;
+		height: 200px;
+		background-color:gray;
+		text-align:rigth
+	}
+
+	&.box-full{
+
+		& .background {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100vh;
+			background: rgba(0,0,0,0.5);
+			z-index: 10;
+			cursor: pointer;
+		}
+		& .children {
+			position: fixed;
+			width: 100%;
+			left: 0;
+			top: 0;
+			z-index: 11;
+
+		}
+	}
+
 }

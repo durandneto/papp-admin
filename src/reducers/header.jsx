@@ -1,4 +1,4 @@
-import { SHOW_MOBILE_MENU, SEARCHED_USER } from '../actions'
+import { SHOW_MOBILE_MENU } from '../actions'
 import Immutable from 'immutable'
 
 let defaultState = Immutable.fromJS({ showMobileMenu : false })

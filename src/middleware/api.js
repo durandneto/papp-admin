@@ -1,5 +1,5 @@
 import superAgent from 'superagent'
-import Promise, { using } from 'bluebird'
+import Promise from 'bluebird'
 import _ from 'lodash'
 import config from './../config'
 import { camelizeKeys } from 'humps'
@@ -103,7 +103,7 @@ function extractParams (callApi) {
   } = callApi
   let url = ''
   
-  if ( type == 'internal' ){
+  if ( type === 'internal' ){
     url = `${config.API_BASE_URL_INTERNAL}${path}`
   }else{
     url = `${config.API_BASE_URL_EXTERNAL}${path}`

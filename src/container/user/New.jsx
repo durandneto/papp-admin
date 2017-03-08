@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Well, Button } from 'react-bootstrap'
+import { FormGroup, ControlLabel, FormControl, HelpBlock, Well } from 'react-bootstrap'
 
 import * as Actions from './../../actions'
 import { ButtonFormSquad } from './../../atoms/Buttons'
@@ -35,7 +35,7 @@ class NewUser extends Component {
 
     const length = this.state.email.length
     if( length > 0 ){
-      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if ( re.test(this.state.email) ) {
         return 'success'
       } else {
