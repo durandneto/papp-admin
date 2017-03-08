@@ -30,7 +30,6 @@ class ButtonContainer extends Component {
 			    	type='primary'
 			    	icon='fa-plus-square'
 			    	to={`/${this.props.path}/new`}
-			    	label='+'
 			    	 />
 			    <ButtonFormSquad label='Close' 
 			    	click={this._close}/>

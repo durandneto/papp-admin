@@ -41,7 +41,7 @@ function appReducer (state = defaultState, action) {
   			columns = Object.keys(action.response.users[0])
   			rows = action.response.users
   		}
-		return state.mergeDeep({
+		return state.merge({
 			data: {
 				columns: columns
 				, rows: rows 

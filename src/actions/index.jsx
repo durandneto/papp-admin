@@ -181,7 +181,7 @@ export function fetch_users(users, action) {
           ]
         }
       )
-       dispatch(user_set_page(page, allowNavigation))
+      dispatch(user_set_page(page, allowNavigation))
     } else{
       dispatch(user_set_page(1, allowNavigation))
     }

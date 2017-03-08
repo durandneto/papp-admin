@@ -32,8 +32,8 @@ class BoxFull extends Component {
   _open(){
 
     let elements = document.getElementsByClassName('animation')
-      
     let tl = new TimelineMax();
+    
     tl.add( TweenMax.set(this.refs.boxFull,{className:"+=box-full"}));
     tl.add( TweenMax.set(elements, {opacity:0}));
     tl.add( TweenMax.staggerTo(elements, 0.5, { opacity: 1}, 0.5));            
