@@ -9,6 +9,11 @@ export const SHOW_MOBILE_MENU = Symbol('SHOW_MOBILE_MENU')
 export const SEARCHED_USER = Symbol('SEARCHED_USER')
 export const SEARCHED_USER_COUNT = Symbol('SEARCHED_USER_COUNT')
 export const USER_SET_PAGE = Symbol('USER_SET_PAGE')
+export const CREATTING_NEW_USER = Symbol('CREATTING_NEW_USER')
+export const HIDE_MESSAGE = Symbol('HIDE_MESSAGE')
+export const NEW_USER = Symbol('NEW_USER')
+export const CREATED_NEW_USER = Symbol('CREATED_NEW_USER')
+export const CREATED_NEW_USER_ERROR = Symbol('CREATED_NEW_USER_ERROR')
 
 
 export function carousel_next(){
@@ -187,22 +192,46 @@ export function fetch_users(users, action) {
     }
   }
 }
-export function save_user(user) {
-  return {
-    [CHAIN_API]: [
-      ()=> {
-        return {
-          [CALL_API]: {
-            method: 'post',
-            type : 'external',
-            body: {name:user.full_name,email:user.email},
-            path: '/user/save',
-            successType: SEARCHED_USER
+
+export function is_saving_user(isSavingUser){
+   return  {
+      type: CREATTING_NEW_USER
+      , isSavingUser
+    }
+}
+export function new_user(user){
+   return  {
+      type: NEW_USER
+      , user
+    }
+}
+export function create_new_user(user) {
+  return (dispatch, getState) => {
+    let newUser = getState().ListUsers.get('newUser')
+    dispatch(is_saving_user(true))
+    dispatch({
+      [CHAIN_API]: [
+          ()=> {
+            return {
+              [CALL_API]: {
+                method: 'post',
+                type : 'external',
+                body: newUser.toObject(),
+                path: '/user/save',
+                successType: CREATED_NEW_USER,
+                errorType: CREATED_NEW_USER_ERROR
+              }
+            }
+          }, (response) => {
+            console.log(response)
           }
-        }
-      }, (response) => {
-        console.log(response)
-      }
-    ]
+        ]
+    })
+  }
+}
+
+export function hide_message(){
+  return {
+    type: HIDE_MESSAGE
   }
 }

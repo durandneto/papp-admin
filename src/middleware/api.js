@@ -50,7 +50,7 @@ function createRequestPromise (apiActionCreator, next, getState, dispatch) {
     let apiAction = apiActionCreator(prevBody)
     let deferred = Promise.defer()
     let params = extractParams(apiAction[CALL_API])
-    let header = params.header || { "API-Key-passamos" : "user-unlogged" }
+    let header = params.header || { "API-Key-Papp" : "user-unlogged" }
 
     superAgent[params.method](params.url)
       .send(params.body)
@@ -61,7 +61,10 @@ function createRequestPromise (apiActionCreator, next, getState, dispatch) {
           if ( params.errorType ) {
             dispatch(actionWith(apiAction, {
               type: params.errorType,
-              error: err
+              message: res.body.error,
+              status: res.body.status,
+              statusCode: res.statusCode,
+              statusText: res.statusText
             }))
           }
 
@@ -73,7 +76,8 @@ function createRequestPromise (apiActionCreator, next, getState, dispatch) {
           let resBody = camelizeKeys(res.body)
           dispatch(actionWith(apiAction, {
             type: params.successType,
-            response: resBody
+            response: resBody,
+            status: resBody.status
           }))
 
           if (_.isFunction(params.afterSuccess)) {

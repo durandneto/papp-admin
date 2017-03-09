@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Well } from 'react-bootstrap'
+import { Alert, FormGroup, ControlLabel, FormControl, HelpBlock, Well } from 'react-bootstrap'
 
 import * as Actions from './../../actions'
 import { ButtonFormSquad } from './../../atoms/Buttons'
@@ -12,15 +12,16 @@ import Home from './../../pages/Home'
 class NewUser extends Component {
 
   componentWillMount() {
-    this.setState({ full_name:'',email:''})
+    this.setState(this.props.ListUsers.get('newUser').toObject())
+    this.props.hide_message()
   }
 
   _save() {
-    this.props.save_user(this.state)
+    this.props.create_new_user()
   }
 
   getValidationState() {
-    const length = this.state.full_name.length
+    const length = this.state.name.length
     if (length > 5) return 'success'
     else if (length > 3) return 'warning'
     else if (length > 0) return 'error'
@@ -28,7 +29,9 @@ class NewUser extends Component {
   }
 
   handleChange(e) {
-    this.setState({ full_name: e.target.value })
+    this.setState({ name: e.target.value },()=> {
+      this.props.new_user(this.state)
+    })
   }
 
   getValidationEmail() {
@@ -46,7 +49,9 @@ class NewUser extends Component {
   }
 
   handleChangeEmail(e) {
-    this.setState({ email: e.target.value })
+    this.setState({ email: e.target.value },()=> {
+      this.props.new_user(this.state)
+    })
   }
 
   render() {
@@ -62,7 +67,7 @@ class NewUser extends Component {
               <ControlLabel>Full Name</ControlLabel>
               <FormControl
                 type="text"
-                value={this.state.full_name}
+                value={this.props.ListUsers.get('newUser').get('name')}
                 placeholder="Enter full name"
                 onChange={this.handleChange.bind(this)}
               />
@@ -77,7 +82,7 @@ class NewUser extends Component {
               <ControlLabel>E-mail</ControlLabel>
               <FormControl
                 type="email"
-                value={this.state.email}
+                value={this.props.ListUsers.get('newUser').get('email')}
                 placeholder="Enter e-mail"
                 onChange={this.handleChangeEmail.bind(this)}
               />
@@ -85,8 +90,27 @@ class NewUser extends Component {
               <HelpBlock>Validation is based on e-mail validation.</HelpBlock>
             </FormGroup>
 
+            {
+              this.props.ListUsers.get('status').get('type') === 'SUCCESS' ?
+                 <Alert bsStyle="success" onDismiss={this.props.hide_message}>
+                  <h4>Oh yeah! New User created succefully!</h4>
+                  <p>ID: { this.props.ListUsers.get('lastUser').get('id') }</p> 
+                  <p>Name: { this.props.ListUsers.get('lastUser').get('name') }</p> 
+                  <p>E-mail: { this.props.ListUsers.get('lastUser').get('email') }</p> 
+                </Alert>: null
+            }
+            {
+              this.props.ListUsers.get('status').get('type') === 'ERROR' ?
+                <Alert bsStyle="danger" onDismiss={this.props.hide_message}>
+                  <h4>Oh snap! You got an error!</h4>
+                  <p>{ this.props.ListUsers.get('status').get('message') }</p>
+                </Alert> : null
+            }
+
             <Well bsSize="large">
-              Look I'm in a large well!
+            {
+              this.props.ListUsers.get('isSavingUser') ? 'Saving new User' : 'Actions'
+            }
               <ButtonFormSquad 
                 className='pull-right'
                 type='primary'
@@ -105,6 +129,7 @@ class NewUser extends Component {
 function mapStateToProps(state) {
   return {
     header : state.header
+    , ListUsers: state.ListUsers
   }
 }
 

@@ -1,6 +1,11 @@
 import { 
 	SEARCHED_USER
 	, USER_SET_PAGE
+	, CREATTING_NEW_USER
+	, NEW_USER
+	, CREATED_NEW_USER
+	, CREATED_NEW_USER_ERROR
+	, HIDE_MESSAGE
 	, SEARCHED_USER_COUNT } from '../actions'
 import Immutable from 'immutable'
 
@@ -11,6 +16,7 @@ let defaultState = Immutable.fromJS({
 		, columns: []
 	}
 	, isLoadded: false
+	, isSavingUser: false
 	, paginator: {
 		count: 0
 		, totalPage: 0
@@ -20,6 +26,19 @@ let defaultState = Immutable.fromJS({
 			next : true
 			, prev : true
 		}
+	}
+	, newUser: {
+		name: ''
+		, email: ''
+	}
+	, lastUser: {
+		name: ''
+		, email: ''
+		, id: 0
+	}
+	, status: {
+		type: ''
+		, message: ''
 	}
 })
 
@@ -33,6 +52,51 @@ function appReducer (state = defaultState, action) {
 				}
 			})
 		 // eslint-disable-next-line
+		break
+	case CREATTING_NEW_USER:
+		return state.mergeDeep({isSavingUser: true})
+		// eslint-disable-next-line
+		break
+	case NEW_USER:
+		return state.merge({newUser: action.user})
+		// eslint-disable-next-line
+		break
+	case CREATED_NEW_USER:
+
+		let keys = Object.keys(state.get('newUser').toObject())
+		let resetUser = {}
+
+		keys.map((key)=>{
+			resetUser[key] = ''
+		})
+
+		return state.merge({
+			isSavingUser: false
+			, status: { type: action.status, message: '' }
+			, newUser: resetUser
+			, lastUser: action.response.user
+		} 
+		)
+		// eslint-disable-next-line
+		break
+	case CREATED_NEW_USER_ERROR:
+		return state.merge({
+			isSavingUser: false,
+			status: {
+				type: action.status
+				, message: action.message
+			} 
+		})
+		//eslint-disable-next-line
+		break
+	case HIDE_MESSAGE:
+		return state.merge({
+			status: {
+				type: ''
+				, message: ''
+			} 
+		})
+		//eslint-disable-next-line
 		break
   	case SEARCHED_USER:
   		let columns = null
