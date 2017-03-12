@@ -1,7 +1,9 @@
 import { CALL_API, CHAIN_API } from './../middleware/api'
+import { browserHistory } from 'react-router'
 
 export const CHANGE_NAME = Symbol('CHANGE_NAME')
 export const RESET_CAROUSEL = Symbol('RESET_CAROUSEL')
+export const SELECT_USER = Symbol('SELECT_USER')
 export const CAROUSEL_PREV = Symbol('CAROUSEL_PREV')
 export const CAROUSEL_NEXT = Symbol('CAROUSEL_NEXT')
 export const CAROUSEL_CURRENT = Symbol('CAROUSEL_CURRENT')
@@ -14,7 +16,22 @@ export const HIDE_MESSAGE = Symbol('HIDE_MESSAGE')
 export const NEW_USER = Symbol('NEW_USER')
 export const CREATED_NEW_USER = Symbol('CREATED_NEW_USER')
 export const CREATED_NEW_USER_ERROR = Symbol('CREATED_NEW_USER_ERROR')
+export const UPDATED_USER_ERROR = Symbol('UPDATED_USER_ERROR')
+export const SET_USER_PAGE_TYPE = Symbol('SET_USER_PAGE_TYPE')
+export const UPDATED_USER = Symbol('UPDATED_USER')
+export const DELETED_USER = Symbol('DELETED_USER')
+export const UPDATE_SEARCH_TERM = Symbol('UPDATE_SEARCH_TERM')
+export const DELETED_USER_ERROR = Symbol('DELETED_USER_ERROR')
 
+export function go ( path , returnUrl ) {
+  console.log('path',path)
+  return (dispatch) => {
+    if ( returnUrl !== undefined && returnUrl !== '')
+      browserHistory.push(returnUrl)
+    else
+      browserHistory.push(path)
+  }
+}
 
 export function carousel_next(){
   return (dispatch,getState) => {
@@ -104,12 +121,15 @@ export function fetch_users(users, action) {
   let limit = users.get('paginator').get('limitPerPage')
   let total = users.get('paginator').get('totalPage')
   let page = users.get('paginator').get('currentPage')
+  let term = users.get('searchTerm')
   // let count = users.get('paginator').get('count')
   let search = true;
   let allowNavigation = {
       next : true
       , prev : false
     }
+
+    console.log(term)
 
   switch(true){
     case action === 'next':
@@ -151,6 +171,9 @@ export function fetch_users(users, action) {
       }
 
       break
+    case action === 'search':
+      page = 1
+      break
     default:
   }
 
@@ -166,7 +189,8 @@ export function fetch_users(users, action) {
                   method: 'get',
                   type : 'external',
                   path: '/user/search?limit=' + limit
-                  + '&page='+ page,
+                  + '&page='+ page
+                  + '&name='+ term,
                   successType: SEARCHED_USER
                 }
               }
@@ -177,7 +201,7 @@ export function fetch_users(users, action) {
                   [CALL_API]: {
                     method: 'get',
                     type : 'external', 
-                    path: '/user/count',
+                    path: '/user/count?name='+term,
                     successType: SEARCHED_USER_COUNT,
                     
                   }
@@ -199,10 +223,32 @@ export function is_saving_user(isSavingUser){
       , isSavingUser
     }
 }
+export function select_user(user){
+
+  return (dispatch) =>{
+    // dispatch(set_user_page_type('view'))   
+    dispatch({
+      type: SELECT_USER
+      , user
+    })   
+  }
+}
+export function update_search_term(term){
+   return  {
+      type: UPDATE_SEARCH_TERM
+      , term
+    }
+}
 export function new_user(user){
    return  {
       type: NEW_USER
       , user
+    }
+}
+export function set_user_page_type(param){
+   return  {
+      type: SET_USER_PAGE_TYPE
+      , param
     }
 }
 export function create_new_user(user) {
@@ -220,6 +266,59 @@ export function create_new_user(user) {
                 path: '/user/save',
                 successType: CREATED_NEW_USER,
                 errorType: CREATED_NEW_USER_ERROR
+              }
+            }
+          }, (response) => {
+            console.log(response)
+          }
+        ]
+    })
+  }
+}
+
+export function remove_user(user) {
+  return (dispatch, getState) => {
+    let selectedUser = getState().ListUsers.get('selectedUser')
+    dispatch(is_saving_user(true))
+    dispatch({
+      [CHAIN_API]: [
+          ()=> {
+            return {
+              [CALL_API]: {
+                method: 'delete',
+                type : 'external',
+                path: '/user/remove',
+                header: { 'api-key-papp': selectedUser.get('id')},
+                successType: DELETED_USER,
+                errorType: DELETED_USER_ERROR
+              }
+            }
+          }, (response) => {
+                  // go('/users')
+                  window.location.href = '/users'
+            console.log(response)
+          }
+        ]
+    })
+  }
+}
+
+export function update_user(user) {
+  return (dispatch, getState) => {
+    let selectedUser = getState().ListUsers.get('selectedUser')
+    dispatch(is_saving_user(true))
+    dispatch({
+      [CHAIN_API]: [
+          ()=> {
+            return {
+              [CALL_API]: {
+                method: 'put',
+                type : 'external',
+                body: selectedUser.toObject(),
+                path: '/user/update',
+                header: { 'api-key-papp': selectedUser.get('id')},
+                successType: UPDATED_USER,
+                errorType: UPDATED_USER_ERROR
               }
             }
           }, (response) => {

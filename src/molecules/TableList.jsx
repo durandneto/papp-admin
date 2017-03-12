@@ -3,13 +3,7 @@ import Paginator from './Paginator'
 import { ButtonLinkTableHeader, ButtonDefault } from './../atoms/Buttons'
 
 class TableList extends Component {
- 
-  _view(param) {
-    this.props.callback('view')
-  }
-  _remove(param) {
-    this.props.callback('remove')
-  }
+
   _next(param) {
     this.props.callback('next')
   }
@@ -59,8 +53,8 @@ class TableList extends Component {
                     })
                   }
                     <td >
-                     <ButtonDefault icon="fa-eye" click={this._view.bind(this,2)}  />
-                      <ButtonDefault icon="fa-ban" click={this._remove.bind(this,3)} />
+                     <ButtonDefault icon="fa-eye" click={this.props.view.bind(this,value)}  />
+                      <ButtonDefault icon="fa-ban" click={this.props.remove.bind(this,value)} />
                     </td>
                   </tr>
                 )

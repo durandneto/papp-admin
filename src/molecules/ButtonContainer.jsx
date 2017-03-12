@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { ButtonSquad, ButtonFormSquad } from './../atoms/Buttons'
 import { BoxFull } from './../atoms/Box'
 
+import { FormControl } from 'react-bootstrap'
+
 
 class ButtonContainer extends Component {
 
@@ -12,7 +14,7 @@ class ButtonContainer extends Component {
 	}
 
 	componentWillMount(){
-		this.setState({isOpen : false })
+		this.setState({isOpen : false, search: '' })
 	}
 
   _open (e){
@@ -21,21 +23,38 @@ class ButtonContainer extends Component {
   _close (e){
     this.setState({isOpen : false})
   }
+  _search(){
+    this.props.search(this.state.search)
+  }
+
+  handleChange(e) {
+    this.setState({ search: e.target.value }, () => {
+    	this.props.updateSearchTerm(this.state.search)
+    	})
+  }
 
   render() {
     return (
     	<BoxFull isOpen={this.state.isOpen} closeCallback={this._close} >
 		    <div className='well'>
-			    <ButtonSquad 
-			    	type='primary'
+			    <ButtonFormSquad
 			    	icon='fa-plus-square'
-			    	to={`/${this.props.path}/new`}
-			    	 />
+			    type='primary' 
+			    	click={this.props.add}/>
 			    <ButtonFormSquad label='Close' 
 			    	click={this._close}/>
 			    <ButtonFormSquad label='Open'
 			    	click={this._open}
 			     />
+		 
+            <ButtonFormSquad click={this._search.bind(this)} label='Search' className='pull-right' />
+			      <input
+			      		className='pull-right'
+                type="text"
+                value={this.state.search}
+                placeholder="Enter text"
+                onChange={this.handleChange.bind(this)}
+              />
 	      </div>
         </BoxFull>
     );

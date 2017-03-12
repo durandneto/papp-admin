@@ -4,8 +4,12 @@ import {
 	, CREATTING_NEW_USER
 	, NEW_USER
 	, CREATED_NEW_USER
+	, UPDATED_USER
+	, SELECT_USER
 	, CREATED_NEW_USER_ERROR
 	, HIDE_MESSAGE
+	, SET_USER_PAGE_TYPE
+	, UPDATE_SEARCH_TERM
 	, SEARCHED_USER_COUNT } from '../actions'
 import Immutable from 'immutable'
 
@@ -15,8 +19,16 @@ let defaultState = Immutable.fromJS({
 		rows: []
 		, columns: []
 	}
+	, searchTerm : ''
 	, isLoadded: false
+	, visualizationType: 'view'
 	, isSavingUser: false
+	, title: {
+		edit: { title: 'Edit User' }
+		, remove: { title: 'Remove User?' }
+		, view: { title: 'User Detail' }
+		, new: { title: 'New User' }
+	}
 	, paginator: {
 		count: 0
 		, totalPage: 0
@@ -28,17 +40,23 @@ let defaultState = Immutable.fromJS({
 		}
 	}
 	, newUser: {
-		name: ''
-		, email: ''
+		name: null
+		, email: null
+		, password: null
 	}
 	, lastUser: {
-		name: ''
-		, email: ''
-		, id: 0
+		name: null
+		, email: null
+		, id: -1
+	}
+	, selectedUser: {
+		name: null
+		, email: null
+		, id: -1
 	}
 	, status: {
-		type: ''
-		, message: ''
+		type: null
+		, message: null
 	}
 })
 
@@ -57,8 +75,25 @@ function appReducer (state = defaultState, action) {
 		return state.mergeDeep({isSavingUser: true})
 		// eslint-disable-next-line
 		break
+	case SET_USER_PAGE_TYPE:
+		return state.merge({visualizationType: action.param})
+		// eslint-disable-next-line
+		break
+	case UPDATED_USER:
+		return state.merge({visualizationType: 'view'})
+		// eslint-disable-next-line
+		break
 	case NEW_USER:
 		return state.merge({newUser: action.user})
+		// eslint-disable-next-line
+		break
+	case SELECT_USER:
+		return state.merge({selectedUser: action.user})
+		// eslint-disable-next-line
+		breakt-disable-next-line
+		break
+	case UPDATE_SEARCH_TERM:
+		return state.merge({searchTerm: action.term})
 		// eslint-disable-next-line
 		break
 	case CREATED_NEW_USER:
@@ -67,16 +102,15 @@ function appReducer (state = defaultState, action) {
 		let resetUser = {}
 
 		keys.map((key)=>{
-			resetUser[key] = ''
+			resetUser[key] = null
 		})
 
 		return state.merge({
 			isSavingUser: false
-			, status: { type: action.status, message: '' }
+			, status: { type: action.status, message: null }
 			, newUser: resetUser
 			, lastUser: action.response.user
-		} 
-		)
+		})
 		// eslint-disable-next-line
 		break
 	case CREATED_NEW_USER_ERROR:
@@ -92,8 +126,8 @@ function appReducer (state = defaultState, action) {
 	case HIDE_MESSAGE:
 		return state.merge({
 			status: {
-				type: ''
-				, message: ''
+				type: null
+				, message: null
 			} 
 		})
 		//eslint-disable-next-line

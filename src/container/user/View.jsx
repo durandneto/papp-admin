@@ -21,21 +21,19 @@ class NewUser extends Component {
   		<Home
   			header={this.props.header}
   			show_mobile_menu={this.props.show_mobile_menu} >
-
         <UserForm
           reducer={this.props.ListUsers}
-
-          user={this.props.ListUsers.get('newUser')}
-          lastUser={this.props.ListUsers.get('lastUser')}
-          status={this.props.ListUsers.get('status')}
           
+          user={this.props.ListUsers.get('selectedUser')}
+          status={this.props.ListUsers.get('status')}
+
           hide_message={this.props.hide_message}
-          save={this.props.new_user.bind(this)}
+          save={this.props.select_user.bind(this)}
           set_page_type={this.props.set_user_page_type}
-          submit={this.props.create_new_user.bind(this)}
+          submit={this.props.update_user.bind(this)}
           remove={this.props.remove_user.bind(this)}
          />
-      </Home>
+        </Home>
   	)
   }
 }

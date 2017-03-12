@@ -10,6 +10,7 @@ import Reports from './container/Reports'
 import Dashboard from './container/Dashboard'
 import Users from './container/user/List'
 import NewUser from './container/user/New'
+import ViewUser from './container/user/View'
 import App from './container/App' 
 import NoMatch from './container/NoMatch' 
 
@@ -19,6 +20,7 @@ render((
       <Route path="/" component={App}>
         <Route path="users" component={Users} />
         <Route path="users/new" component={NewUser} />
+        <Route path="users/:user_id" component={ViewUser} />
         <Route path="topics" component={Topics} />
         <Route path="groups" component={Groups} />
         <Route path="reports" component={Reports} />

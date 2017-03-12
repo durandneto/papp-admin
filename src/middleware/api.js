@@ -50,7 +50,7 @@ function createRequestPromise (apiActionCreator, next, getState, dispatch) {
     let apiAction = apiActionCreator(prevBody)
     let deferred = Promise.defer()
     let params = extractParams(apiAction[CALL_API])
-    let header = params.header || { "API-Key-Papp" : "user-unlogged" }
+    let header = params.header || { "api-key-papp" : "user-unlogged" }
 
     superAgent[params.method](params.url)
       .send(params.body)

@@ -46,7 +46,7 @@ class BoxFull extends Component {
     }else{
       this._close()
     }
-    return false
+    return true
   }
 
   render() {
