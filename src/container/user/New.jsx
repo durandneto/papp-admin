@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { Alert, FormGroup, ControlLabel, FormControl, HelpBlock, Well } from 'react-bootstrap'
 
 import * as Actions from './../../actions'
+import * as UserActions from './../../actions/user'
 import UserForm from './../../organisms/forms/User'
 
 
@@ -50,7 +51,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch)
+  return bindActionCreators(Object.assign(Actions, UserActions) , dispatch )
 }
 
 export { NewUser }

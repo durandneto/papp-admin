@@ -1,22 +1,22 @@
 import { HIDE_MESSAGE } from '../actions'
 
 import { 
-	SEARCHED_USER
-	, USER_SET_PAGE
-	, CREATTING_NEW_USER
-	, NEW_USER
-	, CREATED_NEW_USER
-	, UPDATED_USER
-	, SELECT_USER
-	, CREATED_NEW_USER_ERROR
-	, SET_USER_PAGE_TYPE
+	SEARCHED
+	, SET_PAGE
+	, CREATTING_NEW
+	, NEW
+	, CREATED_NEW
+	, UPDATED
+	, SELECT
+	, CREATED_NEW_ERROR
+	, SET_PAGE_TYPE
 	, UPDATE_SEARCH_TERM
-	, SEARCHED_USER_COUNT } from '../actions/user'
+	, SEARCHED_COUNT } from '../actions'
 
 import Immutable from 'immutable'
 
 let defaultState = Immutable.fromJS({
-	path: 'users'
+	path: '/languages'
 	, data: {
 		rows: []
 		, columns: []
@@ -24,12 +24,12 @@ let defaultState = Immutable.fromJS({
 	, searchTerm : ''
 	, isLoadded: false
 	, visualizationType: 'view'
-	, isSavingUser: false
+	, isSaving: false
 	, title: {
-		edit: { title: 'Edit User' }
-		, remove: { title: 'Remove User?' }
-		, view: { title: 'User Detail' }
-		, new: { title: 'New User' }
+		edit: { title: 'Edit Language' }
+		, remove: { title: 'Remove Language?' }
+		, view: { title: 'Language Detail' }
+		, new: { title: 'New Language' }
 	}
 	, paginator: {
 		count: 0
@@ -41,19 +41,15 @@ let defaultState = Immutable.fromJS({
 			, prev : true
 		}
 	}
-	, newUser: {
+	, newRow: {
 		name: null
-		, email: null
-		, password: null
 	}
-	, lastUser: {
+	, lastRow: {
 		name: null
-		, email: null
 		, id: -1
 	}
-	, selectedUser: {
+	, selectedRow: {
 		name: null
-		, email: null
 		, id: -1
 	}
 	, status: {
@@ -64,7 +60,7 @@ let defaultState = Immutable.fromJS({
 
 function appReducer (state = defaultState, action) {
   switch ( action.type ) { 
-  	case USER_SET_PAGE:
+  	case SET_PAGE:
 		return state.mergeDeep({
 			paginator: {
 					currentPage: action.page
@@ -73,24 +69,24 @@ function appReducer (state = defaultState, action) {
 			})
 		 // eslint-disable-next-line
 		break
-	case CREATTING_NEW_USER:
-		return state.mergeDeep({isSavingUser: true})
+	case CREATTING_NEW:
+		return state.mergeDeep({isSaving: true})
 		// eslint-disable-next-line
 		break
-	case SET_USER_PAGE_TYPE:
+	case SET_PAGE_TYPE:
 		return state.merge({visualizationType: action.param})
 		// eslint-disable-next-line
 		break
-	case UPDATED_USER:
+	case UPDATED:
 		return state.merge({visualizationType: 'view'})
 		// eslint-disable-next-line
 		break
-	case NEW_USER:
-		return state.merge({newUser: action.user})
+	case NEW:
+		return state.merge({newRow: action.newRow})
 		// eslint-disable-next-line
 		break
-	case SELECT_USER:
-		return state.merge({selectedUser: action.user})
+	case SELECT:
+		return state.merge({selectedRow: action.selectedRow})
 		// eslint-disable-next-line
 		breakt-disable-next-line
 		break
@@ -98,26 +94,26 @@ function appReducer (state = defaultState, action) {
 		return state.merge({searchTerm: action.term})
 		// eslint-disable-next-line
 		break
-	case CREATED_NEW_USER:
+	case CREATED_NEW:
 
-		let keys = Object.keys(state.get('newUser').toObject())
-		let resetUser = {}
+		let keys = Object.keys(state.get('newRow').toObject())
+		let resetRow = {}
 
 		keys.map((key)=>{
-			resetUser[key] = null
+			resetRow[key] = null
 		})
 
 		return state.merge({
-			isSavingUser: false
+			isSaving: false
 			, status: { type: action.status, message: null }
-			, newUser: resetUser
-			, lastUser: action.response.user
+			, newRow: resetRow
+			, lastRow: action.response.row
 		})
 		// eslint-disable-next-line
 		break
-	case CREATED_NEW_USER_ERROR:
+	case CREATED_NEW_ERROR:
 		return state.merge({
-			isSavingUser: false,
+			isSaving: false,
 			status: {
 				type: action.status
 				, message: action.message
@@ -134,12 +130,12 @@ function appReducer (state = defaultState, action) {
 		})
 		//eslint-disable-next-line
 		break
-  	case SEARCHED_USER:
+  	case SEARCHED:
   		let columns = null
   		let rows = null
-  		if ( action.response.users.length > 0 ){
-  			columns = Object.keys(action.response.users[0])
-  			rows = action.response.users
+  		if ( action.response.rows.length > 0 ){
+  			columns = Object.keys(action.response.rows[0])
+  			rows = action.response.rows
   		}
 		return state.merge({
 			data: {
@@ -150,7 +146,7 @@ function appReducer (state = defaultState, action) {
 			})
 		 // eslint-disable-next-line
 		break
-  	case SEARCHED_USER_COUNT:
+  	case SEARCHED_COUNT:
 		return state.mergeDeep({
 			paginator:{
 				count: action.response.count

@@ -12,6 +12,7 @@ class Content extends Component {
           <Nav bsStyle="pills" stacked activeKey={this.props.location.pathname.split('/')[1]}>
               <NavItem eventKey={''} ><Link to='/'>Dashboard</Link></NavItem>
               <NavItem eventKey={'users'} ><Link to='/users'>Users</Link></NavItem>
+              <NavItem eventKey={'languages'} ><Link to='/languages'>Languages</Link></NavItem>
               <NavItem eventKey={'groups'} ><Link to='/groups'>Groups</Link></NavItem> 
               <NavItem eventKey={'topics'} ><Link to='/topics'>Topics</Link></NavItem>
               <NavItem eventKey={'reports'} ><Link to='/reports'>Reports</Link></NavItem>

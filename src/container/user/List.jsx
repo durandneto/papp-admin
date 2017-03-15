@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as Actions from './../../actions'
+import * as UserActions from './../../actions/user'
 
 import TableList from './../../pages/TableList'
 
@@ -32,6 +33,7 @@ class Users extends Component {
 	}
 
   render() {
+  	this.props.teste()
 		return (
 			<TableList
 				reducer={this.props.ListUsers}
@@ -59,7 +61,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch)
+  return bindActionCreators(Object.assign(Actions, UserActions) , dispatch )
 }
 
 export { Users }
