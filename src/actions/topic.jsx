@@ -215,7 +215,7 @@ export function update(topic) {
               [CALL_API]: {
                 method: 'put',
                 type : 'external',
-                body: selectedRow.toObject(),
+                body: {id: selectedRow.get('id'),name: selectedRow.get('name'), user: selectedRow.get('user').get('id')},
                 path: '/topic/update',
                 header: { 'api-key-papp': selectedRow.get('id')},
                 successType: UPDATED,

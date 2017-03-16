@@ -30,6 +30,8 @@ class TopicForm extends FormValidation {
   		 <Alert bsStyle={(this.props.reducer.get('visualizationType') === 'remove') ? 'danger': 'info'} >
           <p>ID: { this.props.row.get('id') }</p> 
           <p>Name: { this.props.row.get('name') }</p> 
+          <p>User Id: { this.props.row.get('user').get('id') }</p> 
+          <p>User Email: { this.props.row.get('user').get('email') }</p> 
         </Alert>
   	)
   }
@@ -127,7 +129,7 @@ class TopicForm extends FormValidation {
               <ControlLabel>User ID</ControlLabel>
               <FormControl
                 type="text"
-                value={this.getValidationStringState(this.props.row.get('user').get('id'))}
+                value={this.props.row.get('user').get('id')}
                 placeholder="Enter User ID"
                 onChange={this.handleUserChange.bind(this)}
               />
@@ -141,6 +143,8 @@ class TopicForm extends FormValidation {
                   <h4>Oh yeah! New Topic created succefully!</h4>
                   <p>ID: { this.props.lastRow.get('id') }</p> 
                   <p>Name: { this.props.lastRow.get('name') }</p> 
+                  <p>User Id: { this.props.lastRow.get('user').get('id') }</p> 
+                  <p>User Email: { this.props.lastRow.get('user').get('email') }</p> 
                 </Alert>: null
             }
             {

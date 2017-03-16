@@ -5,13 +5,13 @@ import { bindActionCreators } from 'redux'
 import { Alert, FormGroup, ControlLabel, FormControl, HelpBlock, Well } from 'react-bootstrap'
 
 import * as Actions from './../../actions'
-import * as LanguageActions from './../../actions/language'
-import LanguageForm from './../../organisms/forms/Language'
+import * as TopicActions from './../../actions/topic'
+import TopicForm from './../../organisms/forms/Topic'
 
 
 import Home from './../../pages/Home'
 
-class NewLanguage extends Component {
+class NewTopic extends Component {
 
   componentWillMount() {
     this.props.hide_message()
@@ -22,11 +22,11 @@ class NewLanguage extends Component {
   		<Home
   			header={this.props.header}
   			show_mobile_menu={this.props.show_mobile_menu} >
-        <LanguageForm
-          reducer={this.props.ListLanguages}
+        <TopicForm
+          reducer={this.props.ListTopics}
           
-          row={this.props.ListLanguages.get('selectedRow')}
-          status={this.props.ListLanguages.get('status')}
+          row={this.props.ListTopics.get('selectedRow')}
+          status={this.props.ListTopics.get('status')}
 
           hide_message={this.props.hide_message}
           save={this.props.select.bind(this)}
@@ -45,13 +45,13 @@ class NewLanguage extends Component {
 function mapStateToProps(state) {
   return {
     header : state.header
-    , ListLanguages: state.ListLanguages
+    , ListTopics: state.ListTopics
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign(Actions, LanguageActions) , dispatch )
+  return bindActionCreators(Object.assign(Actions, TopicActions) , dispatch )
 }
 
-export { NewLanguage }
-export default connect(mapStateToProps, mapDispatchToProps)(NewLanguage)
+export { NewTopic }
+export default connect(mapStateToProps, mapDispatchToProps)(NewTopic)

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { Alert, FormGroup, ControlLabel, FormControl, HelpBlock, Well } from 'react-bootstrap'
 
 import * as Actions from './../../actions'
-import * as TopicActions from './../../actions/language'
+import * as TopicActions from './../../actions/topic'
 import TopicForm from './../../organisms/forms/Topic'
 
 

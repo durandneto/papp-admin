@@ -91,13 +91,13 @@ function appReducer (state = defaultState, action) {
 		// eslint-disable-next-line
 		break
 	case NEW:
+		console.log(action.newRow)
 		return state.merge({newRow: action.newRow})
 		// eslint-disable-next-line
 		break
 	case SELECT:
 		return state.merge({selectedRow: action.selectedRow})
 		// eslint-disable-next-line
-		breakt-disable-next-line
 		break
 	case UPDATE_SEARCH_TERM:
 		return state.merge({searchTerm: action.term})
@@ -111,6 +111,7 @@ function appReducer (state = defaultState, action) {
 		keys.map((key)=>{
 			resetRow[key] = null
 		})
+		resetRow.user = {id:null}
 
 		return state.merge({
 			isSaving: false
