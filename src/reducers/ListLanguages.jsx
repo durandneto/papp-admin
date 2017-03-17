@@ -11,7 +11,7 @@ import {
 	, CREATED_NEW_ERROR
 	, SET_PAGE_TYPE
 	, UPDATE_SEARCH_TERM
-	, SEARCHED_COUNT } from '../actions'
+	, SEARCHED_COUNT } from '../actions/language'
 
 import Immutable from 'immutable'
 

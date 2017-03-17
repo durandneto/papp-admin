@@ -9,7 +9,12 @@ import Topics from './container/topic/List'
 import NewTopic from './container/topic/New'
 import ViewTopic from './container/topic/View'
 
-import Groups from './container/Groups'
+import UserGroup from './container/user-group/List'
+import NewUserGroup from './container/user-group/New'
+import ViewUserGroup from './container/user-group/View'
+
+
+
 import Reports from './container/Reports'
 import Dashboard from './container/Dashboard'
 
@@ -38,7 +43,12 @@ render((
         <Route path="topics/:id" component={ViewTopic} />
 
 
-        <Route path="groups" component={Groups} />
+        <Route path="groups" component={UserGroup} />
+        <Route path="groups/new" component={NewUserGroup} />
+        <Route path="groups/:id" component={ViewUserGroup} />
+
+
+
         <Route path="reports" component={Reports} />
 
         <Route path="languages" component={Languages} />

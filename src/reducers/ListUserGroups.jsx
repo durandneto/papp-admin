@@ -11,12 +11,12 @@ import {
 	, CREATED_NEW_ERROR
 	, SET_PAGE_TYPE
 	, UPDATE_SEARCH_TERM
-	, SEARCHED_COUNT } from '../actions/topic'
+	, SEARCHED_COUNT } from '../actions/userGroup'
 
 import Immutable from 'immutable'
 
 let defaultState = Immutable.fromJS({
-	path: '/topics'
+	path: '/groups'
 	, data: {
 		rows: []
 		, columns: []
@@ -26,10 +26,10 @@ let defaultState = Immutable.fromJS({
 	, visualizationType: 'view'
 	, isSaving: false
 	, title: {
-		edit: { title: 'Edit Topic' }
-		, remove: { title: 'Remove Topic?' }
-		, view: { title: 'Topic Detail' }
-		, new: { title: 'New Topic' }
+		edit: { title: 'Edit User Group' }
+		, remove: { title: 'Remove User Group?' }
+		, view: { title: 'User Group Detail' }
+		, new: { title: 'New User Group' }
 	}
 	, paginator: {
 		count: 0

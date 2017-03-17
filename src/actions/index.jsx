@@ -48,7 +48,7 @@ export function carousel_next(){
   };
 }
 export function carousel_prev(){
-   return (dispatch, getState) => {
+  return (dispatch, getState) => {
   	let statePrev = getState()
   	let activePrev = statePrev.Carousel.get('active') - 1
     if(activePrev < 0)
