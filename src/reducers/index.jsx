@@ -4,9 +4,11 @@ import ListUsers from './ListUsers'
 import ListLanguages from './ListLanguages'
 import ListTopics from './ListTopics'
 import ListUserGroups from './ListUserGroups'
+import ListUserJoinedGroups from './ListUserJoinedGroups'
 
 const reducer = combineReducers({
   header
+  , ListUserJoinedGroups
   , ListUserGroups
   , ListTopics
   , ListLanguages

@@ -53,8 +53,16 @@ class TableList extends Component {
                     })
                   }
                     <td >
-                     <ButtonDefault icon="fa-eye" click={this.props.view.bind(this,value)}  />
-                      <ButtonDefault icon="fa-ban" click={this.props.remove.bind(this,value)} />
+                    {
+                      (this.props.view) ?
+                        <ButtonDefault icon="fa-eye" click={this.props.view.bind(this,value)}  />
+                      : null
+                    }
+                    {
+                      (this.props.remove) ?
+                        <ButtonDefault icon="fa-ban" click={this.props.remove.bind(this,value)} />
+                      : null
+                    }
                     </td>
                   </tr>
                 )

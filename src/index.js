@@ -10,6 +10,7 @@ import NewTopic from './container/topic/New'
 import ViewTopic from './container/topic/View'
 
 import UserGroup from './container/user-group/List'
+import JoinUserGroup from './container/user-group/Join'
 import NewUserGroup from './container/user-group/New'
 import ViewUserGroup from './container/user-group/View'
 
@@ -46,6 +47,7 @@ render((
         <Route path="groups" component={UserGroup} />
         <Route path="groups/new" component={NewUserGroup} />
         <Route path="groups/:id" component={ViewUserGroup} />
+        <Route path="groups/:id/join" component={JoinUserGroup} />
 
 
 

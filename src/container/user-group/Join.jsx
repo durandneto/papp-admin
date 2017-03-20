@@ -6,15 +6,15 @@ import { Alert, FormGroup, ControlLabel, FormControl, HelpBlock, Well } from 're
 
 import * as Actions from './../../actions'
 import * as UserGroupActions from './../../actions/userGroup'
-import UserGroupForm from './../../organisms/forms/UserGroup'
+import UserJoinedGroupForm from './../../organisms/forms/UserJoinedGroup'
 
 
 import Home from './../../pages/Home'
 
-class NewUserGroup extends Component {
+class NewUserJoinedGroup extends Component {
 
   componentWillMount() {
-    this.props.set_page_type('new')
+    this.props.set_member_page_type('new')
     this.props.hide_message()
   }
 
@@ -24,18 +24,19 @@ class NewUserGroup extends Component {
   			header={this.props.header}
   			show_mobile_menu={this.props.show_mobile_menu} >
 
-        <UserGroupForm
-          reducer={this.props.ListUserGroups}
+        <UserJoinedGroupForm
+          reducer={this.props.ListUserJoinedGroups}
+          group={this.props.ListUserGroups.get('selectedRow')}
 
-          row={this.props.ListUserGroups.get('newRow')}
-          lastRow={this.props.ListUserGroups.get('lastRow')}
-          status={this.props.ListUserGroups.get('status')}
+          row={this.props.ListUserJoinedGroups.get('newRow')}
+          lastRow={this.props.ListUserJoinedGroups.get('lastRow')}
+          status={this.props.ListUserJoinedGroups.get('status')}
           
           hide_message={this.props.hide_message}
-          save={this.props.new_row.bind(this)}
-          set_page_type={this.props.set_page_type}
-          submit={this.props.create_new.bind(this)}
-          remove={this.props.remove.bind(this)}
+          save={this.props.new_member_row.bind(this)}
+          set_page_type={this.props.set_member_page_type}
+          submit={this.props.join_new_member.bind(this)}
+          remove={this.props.remove_member.bind(this)}
          />
       </Home>
   	)
@@ -47,6 +48,7 @@ class NewUserGroup extends Component {
 function mapStateToProps(state) {
   return {
     header : state.header
+    , ListUserJoinedGroups: state.ListUserJoinedGroups
     , ListUserGroups: state.ListUserGroups
   }
 }
@@ -55,5 +57,5 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Object.assign(Actions, UserGroupActions) , dispatch )
 }
 
-export { NewUserGroup }
-export default connect(mapStateToProps, mapDispatchToProps)(NewUserGroup)
+export { NewUserJoinedGroup }
+export default connect(mapStateToProps, mapDispatchToProps)(NewUserJoinedGroup)
