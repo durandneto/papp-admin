@@ -41,6 +41,7 @@ class UserGroupForm extends FormValidation {
           <p>ID: { this.props.row.get('id') }</p> 
           <p>Name: { this.props.row.get('name') }</p> 
           <p>User Id: { this.props.row.get('user').get('id') }</p> 
+          <p>User Name: { this.props.row.get('user').get('name') }</p> 
           <p>User Email: { this.props.row.get('user').get('email') }</p> 
           <p>Platform: { this.props.row.get('platform').get('name') }</p> 
           <p>Language: { this.props.row.get('language').get('name') }</p> 
@@ -185,6 +186,7 @@ class UserGroupForm extends FormValidation {
                   <p>ID: { this.props.lastRow.get('id') }</p> 
                   <p>Name: { this.props.lastRow.get('name') || null}</p> 
                   <p>User Id: { this.props.lastRow.get('user').get('id') || null }</p> 
+                  <p>User Name: { this.props.lastRow.get('user').get('name') || null }</p> 
                   <p>User Email: { this.props.lastRow.get('user').get('email')  || null}</p> 
                   <p>Platform: { this.props.lastRow.get('platform').get('name') || null }</p> 
                   <p>Language: { this.props.lastRow.get('language').get('name')  || null}</p> 

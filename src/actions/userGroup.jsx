@@ -128,7 +128,7 @@ export function fetch_members(action) {
                   [CALL_API]: {
                     method: 'get',
                     type : 'external', 
-                    path: '/user/group/count?name='+term,
+                    path: '/user/group/'+group.get('id')+'/members/count?name='+term,
                     successType: SEARCHED_MEMBERS_COUNT,
                     
                   }
