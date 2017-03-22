@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Alert, FormGroup, ControlLabel, FormControl, HelpBlock, Well } from 'react-bootstrap' 
 import { ButtonFormSquad } from './../../atoms/Buttons'
 
-class LanguageForm extends Component {
+class LoginForm extends Component {
 
   componentWillMount() {
-    this.setState(this.props.row.toObject())
+    this.setState(this.props.reducer.toObject())
     this.props.hide_message()
   }
 
@@ -23,7 +23,7 @@ class LanguageForm extends Component {
 	    else return null
   	}
 	
-	return null
+	 return null
   }
 
   getValidationState() {
@@ -34,7 +34,7 @@ class LanguageForm extends Component {
 	    else if (length > 0) return 'error'
 	    else return null
   	}
-	return null
+	 return null
   }
 
   handleChange(e) {
@@ -43,20 +43,49 @@ class LanguageForm extends Component {
     })
   }
 
+  getValidationEmail() {
+
+  	if ( this.state.email ) {
+	    const length = this.state.email.length
+	    if( length > 0 ){
+	      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	      if ( re.test(this.state.email) ) {
+	        return 'success'
+	      } else {
+	        return 'error'
+	      }
+	    }
+  	}
+  }
+
+  handleChangeEmail(e) {
+    this.setState({ email: e.target.value },()=> {
+      this.props.save(this.state)
+    })
+  }
+
+  handleChangePassword(e) {
+    this.setState({ password: e.target.value },()=> {
+      this.props.save(this.state)
+    })
+  }
+
   renderView() {
   	return (
   		 <Alert bsStyle={(this.props.reducer.get('visualizationType') === 'remove') ? 'danger': 'info'} >
-          <p>ID: { this.props.row.get('id') }</p> 
-          <p>Name: { this.props.row.get('name') }</p> 
+          <p>ID: { this.props.reducer.get('id') }</p> 
+          <p>Name: { this.props.reducer.get('name') }</p> 
+          <p>E-mail: { this.props.reducer.get('email') }</p> 
+          <p>Session: { this.props.reducer.get('authenticationToken') }</p> 
         </Alert>
   	)
   }
 
-  renderNewLanguageButton() {
+  renderNewUserButton() {
   	return (
   		<Well bsSize="large">
         {
-          this.props.isSaving ? 'Saving new Language' : 'Actions'
+          this.props.isSaving ? 'Saving new User' : 'Actions'
         }
           <ButtonFormSquad 
             className='pull-right'
@@ -67,7 +96,7 @@ class LanguageForm extends Component {
         </Well>
   	)
   }
-  renderEditLanguageButton() {
+  renderEditUserButton() {
   	return (
   		<Well bsSize="large">
        Actions
@@ -86,27 +115,21 @@ class LanguageForm extends Component {
         </Well>
   	)
   }
-  renderViewLanguageButton() {
+  renderViewUserButton() {
   	return (
   		<Well bsSize="large">
   		Actions
           <ButtonFormSquad 
             className='pull-right'
             type='primary'
-            click={this.props.set_page_type.bind(this,'edit')}
-            label='Edit'
-          />
-          <ButtonFormSquad 
-            className='pull-right'
-            type='danger'
-            click={this.props.set_page_type.bind(this,'remove')}
-            label='Remove'
+            click={this.props.logout.bind(this)}
+            label='Logout'
           />
         </Well>
   	)
   }
 
-  renderRemoveLanguageButton() {
+  renderRemoveUserButton() {
   	return (
   		<Well bsSize="large">
         Actions 
@@ -125,37 +148,53 @@ class LanguageForm extends Component {
           <form>
             <FormGroup
               controlId="formBasicText"
-              validationState={this.getValidationState()}
+              validationState={this.getValidationEmail()}
             >
-              <ControlLabel>Full Name</ControlLabel>
+              <ControlLabel>E-mail</ControlLabel>
               <FormControl
-                type="text"
-                value={this.props.row.get('name')}
-                placeholder="Enter full name"
-                onChange={this.handleChange.bind(this)}
+                type="email"
+                value={this.props.reducer.get('email')}
+                placeholder="Enter e-mail"
+                onChange={this.handleChangeEmail.bind(this)}
               />
               <FormControl.Feedback />
-              <HelpBlock>Validation is based on string length more than 5 caracters.</HelpBlock>
+              <HelpBlock>Validation is based on e-mail validation.</HelpBlock>
+            </FormGroup>
+
+            <FormGroup
+              controlId="formBasicText"
+              validationState={this.getValidationPassword()}
+            >
+              <ControlLabel>Password</ControlLabel>
+              <FormControl
+                type="password"
+                value={this.props.reducer.get('password')}
+                placeholder="Enter password"
+                onChange={this.handleChangePassword.bind(this)}
+              />
+              <FormControl.Feedback />
+              <HelpBlock>Validation is based on string.</HelpBlock>
             </FormGroup>
 
             {
-              this.props.status.get('type') === 'SUCCESS' ?
+              this.props.reducer.get('status').get('type') === 'SUCCESS' ?
                  <Alert bsStyle="success" onDismiss={this.props.hide_message}>
-                  <h4>Oh yeah! New Language created succefully!</h4>
-                  <p>ID: { this.props.lastRow.get('id') }</p> 
-                  <p>Name: { this.props.lastRow.get('name') }</p> 
+                  <h4>Oh yeah! New User created succefully!</h4>
+                  <p>ID: { this.props.lastUser.get('id') }</p> 
+                  <p>Name: { this.props.lastUser.get('name') }</p> 
+                  <p>E-mail: { this.props.lastUser.get('email') }</p> 
                 </Alert>: null
             }
             {
-              this.props.status.get('type') === 'ERROR' ?
+              this.props.reducer.get('status').get('type') === 'ERROR' ?
                 <Alert bsStyle="danger" onDismiss={this.props.hide_message}>
                   <h4>Oh snap! You got an error!</h4>
-                  <p>{ this.props.status.get('message') }</p>
+                  <p>{ this.props.reducer.get('status').get('message') }</p>
                 </Alert> : null
             }
 
             {
-            	this.renderNewLanguageButton()
+            	this.renderNewUserButton()
             }
           </form> 
   	)
@@ -167,27 +206,26 @@ class LanguageForm extends Component {
   			<h1>{this.props.reducer.get('title').get(this.props.reducer.get('visualizationType')).get('title')}</h1>  			{
 	  			this.props.reducer.get('visualizationType') === 'view' ?
 	  			<span>
+          {
+            this.renderView()
+          }
 	  			{
-	  				this.renderView()
+	  				this.renderViewUserButton()
 	  			}
-	  			{
-	            	this.renderViewLanguageButton()
-	            }
 	  			</span> : null
-	  		 }
-         {
+	  		}{
 	  			this.props.reducer.get('visualizationType') === 'remove' ?
 	  			<span>
 	  			{
 	  				this.renderView()
 	  			}
 	  			{
-          	this.renderRemoveLanguageButton()
+          	this.renderRemoveUserButton()
           }
 	  			</span> : null
 	  		}{
 	  			this.props.reducer.get('visualizationType') === 'new'
-	  			|| this.props.reducer.get('visualizationType') === 'edit' ?
+	  			|| this.props.reducer.get('visualizationType') === 'error' ?
 	  			<span>
 	  			{
 	  				this.renderForm()
@@ -199,4 +237,4 @@ class LanguageForm extends Component {
   }
 }
 
-export default LanguageForm
+export default LoginForm

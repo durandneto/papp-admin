@@ -35,7 +35,7 @@ render((
     <Router history={browserHistory}>
       <Route path="/" component={App}>
 
-        <Route path="users" component={Users} />
+        <Route path="users" component={Users}/>
         <Route path="users/new" component={NewUser} />
         <Route path="users/:user_id" component={ViewUser} />
 

@@ -4,9 +4,16 @@ import { bindActionCreators } from 'redux'
 
 import * as Actions from './../actions'
 
+import LoginPage from './user/Login'
+
 class App extends Component {
 
   render() {
+
+  if(!this.props.User.get('isLogged')){
+    return <LoginPage />
+  }
+
 	return (
 		<span>
 			{this.props.children}
@@ -19,7 +26,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    header : state.header
+    User : state.UserAdmin
   }
 }
 

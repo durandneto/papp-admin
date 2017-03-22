@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 
 import * as Actions from './../actions'
 
+import UserLogin from './../container/user/Login'
+
 import Home from './../pages/Home'
 
 class Dashboard extends Component {
@@ -15,6 +17,8 @@ class Dashboard extends Component {
       Dashboard={''}
 			show_mobile_menu={this.props.show_mobile_menu} >
       Dashboard
+
+      <UserLogin />
       </Home>
 	);
   }

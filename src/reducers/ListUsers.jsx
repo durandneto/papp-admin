@@ -42,23 +42,23 @@ let defaultState = Immutable.fromJS({
 		}
 	}
 	, newUser: {
-		name: null
-		, email: null
-		, password: null
+		name: undefined
+		, email: undefined
+		, password: undefined
 	}
 	, lastUser: {
-		name: null
-		, email: null
+		name: undefined
+		, email: undefined
 		, id: -1
 	}
 	, selectedUser: {
-		name: null
-		, email: null
+		name: undefined
+		, email: undefined
 		, id: -1
 	}
 	, status: {
-		type: null
-		, message: null
+		type: undefined
+		, message: undefined
 	}
 })
 
@@ -104,12 +104,12 @@ function appReducer (state = defaultState, action) {
 		let resetUser = {}
 
 		keys.map((key)=>{
-			resetUser[key] = null
+			resetUser[key] = undefined
 		})
 
 		return state.merge({
 			isSavingUser: false
-			, status: { type: action.status, message: null }
+			, status: { type: action.status, message: undefined }
 			, newUser: resetUser
 			, lastUser: action.response.user
 		})
@@ -128,15 +128,15 @@ function appReducer (state = defaultState, action) {
 	case HIDE_MESSAGE:
 		return state.merge({
 			status: {
-				type: null
-				, message: null
+				type: undefined
+				, message: undefined
 			} 
 		})
 		//eslint-disable-next-line
 		break
   	case SEARCHED_USER:
-  		let columns = null
-  		let rows = null
+  		let columns = undefined
+  		let rows = undefined
   		if ( action.response.users.length > 0 ){
   			columns = Object.keys(action.response.users[0])
   			rows = action.response.users
