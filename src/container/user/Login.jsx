@@ -11,14 +11,12 @@ class Login extends Component {
  
   render() {
 	return  <LoginForm
-
-          reducer={this.props.User}
-          hide_message={this.props.hide_message}
-          save={this.props.set_user_admin}
-          submit={this.props.authenticate}
-          logout={this.props.logout}
-
-         />
+      reducer={this.props.User}
+      hide_message={this.props.hide_message}
+      save={this.props.set_user_admin}
+      submit={this.props.authenticate}
+      logout={this.props.logout}
+    />
   }
 }
 

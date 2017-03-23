@@ -133,13 +133,13 @@ class LoginForm extends Component {
   	return (
   		<Well bsSize="large">
         Actions 
-          <ButtonFormSquad 
-            className='pull-right'
-            type='danger'
-            click={this.props.remove.bind(this)}
-            label='Remove'
-          />
-        </Well>
+        <ButtonFormSquad 
+          className='pull-right'
+          type='danger'
+          click={this.props.remove.bind(this)}
+          label='Remove'
+        />
+      </Well>
   	)
   }
 
