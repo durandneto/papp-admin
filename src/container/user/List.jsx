@@ -10,7 +10,7 @@ import TableList from './../../pages/TableList'
 class Users extends Component {
 
 	componentWillMount() {
-		if ( !this.props.ListUsers.get('isLoadded') )
+		//if ( !this.props.ListUsers.get('isLoadded') )
 			this.props.fetch_users(this.props.ListUsers)
 	}
 
