@@ -10,10 +10,10 @@ class HomeTemplate extends Component {
 
   render() {
 
-    let { header, show_mobile_menu } = this.props
+    let { header, show_mobile_menu, User } = this.props
     return (
       <Grid fluid={true}>
-        <Header data={header} show_mobile_menu={show_mobile_menu}/>
+        <Header data={header} show_mobile_menu={show_mobile_menu} User={User}/>
         <Content location={location} >
           <Row>    
             <Col md={12}>

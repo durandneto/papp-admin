@@ -15,6 +15,7 @@ class Content extends Component {
               <NavItem eventKey={'languages'} ><Link to='/languages'>Languages</Link></NavItem>
               <NavItem eventKey={'groups'} ><Link to='/groups'>Groups</Link></NavItem> 
               <NavItem eventKey={'topics'} ><Link to='/topics'>Topics</Link></NavItem>
+              <NavItem eventKey={'platforms'} ><Link to='/platforms'>Platforms</Link></NavItem>
               <NavItem eventKey={'reports'} ><Link to='/reports'>Reports</Link></NavItem>
 
           </Nav>

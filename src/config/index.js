@@ -1,6 +1,6 @@
 let config = {
   API_BASE_URL_EXTERNAL: process.env.API_BASE_URL_EXTERNAL ||
-    'http://api.papp.im/api/v1'
+    'http://localhost:3030/api/v1'
   , API_BASE_URL_INTERNAL: process.env.API_BASE_URL_INTERNAL ||
     'http://localhost:3000' 
   , 'facebookAuth' : {

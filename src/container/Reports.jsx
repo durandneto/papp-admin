@@ -18,6 +18,7 @@ class Reports extends Component {
         , [345,'report 3','Alice','Alice a Feia']
         ]}
       location={this.props.location}
+      User={this.props.User}
       header={this.props.header}
       show_mobile_menu={this.props.show_mobile_menu} />
 	);
@@ -29,6 +30,7 @@ class Reports extends Component {
 function mapStateToProps(state) {
   return {
     header : state.header
+      ,  User : state.UserAdmin
   }
 }
 

@@ -23,6 +23,10 @@ import Languages from './container/language/List'
 import NewLanguage from './container/language/New'
 import ViewLanguage from './container/language/View'
 
+import Platforms from './container/platform/List'
+import NewPlatform from './container/platform/New'
+import ViewPlatform from './container/platform/View'
+
 import Users from './container/user/List'
 import NewUser from './container/user/New'
 import ViewUser from './container/user/View'
@@ -56,6 +60,10 @@ render((
         <Route path="languages" component={Languages} />
         <Route path="languages/new" component={NewLanguage} />
         <Route path="languages/:id" component={ViewLanguage} />
+
+        <Route path="platforms" component={Platforms} />
+        <Route path="platforms/new" component={NewPlatform} />
+        <Route path="platforms/:id" component={ViewPlatform} />
 
         <IndexRoute component={Dashboard}/>
       </Route>

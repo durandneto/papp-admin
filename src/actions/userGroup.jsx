@@ -320,7 +320,6 @@ export function join_new_member(userGroup) {
 }
 export function create_new(userGroup) {
   return (dispatch, getState) => {
-    console.log(getState())
     let newRow = getState().ListUserGroups.get('newRow')
     dispatch(is_saving(true))
     dispatch({
@@ -408,9 +407,13 @@ export function update(userGroup) {
                 body: {
                   id: selectedRow.get('id')
                   , name: selectedRow.get('name')
+                  , description: selectedRow.get('description')
+                  , location: selectedRow.get('location')
+                  , topics: selectedRow.get('topics')
+                  , link: selectedRow.get('link')
                   , user: selectedRow.get('user').get('id')
                   , platform: selectedRow.get('platform').get('id')
-                  , language: selectedRow.get('language').get('id')
+                  , userLanguage: selectedRow.get('userLanguage').get('id')
                 },
                 path: '/user/group/update',
                 header: { 'api-key-papp': selectedRow.get('id')},

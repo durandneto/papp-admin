@@ -13,7 +13,8 @@ class Dashboard extends Component {
   render() {
 	return (
 		<Home
-			header={this.props.header}
+      header={this.props.header}
+			User={this.props.User}
       Dashboard={''}
 			show_mobile_menu={this.props.show_mobile_menu} >
       Dashboard
@@ -29,6 +30,7 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
   return {
     header : state.header
+      ,  User : state.UserAdmin
   }
 }
 

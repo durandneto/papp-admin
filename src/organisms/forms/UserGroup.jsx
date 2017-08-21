@@ -14,8 +14,29 @@ class UserGroupForm extends FormValidation {
     this.props.hide_message()
   }
 
+  handleLinkChange(e) {
+    this.setState({ link: e.target.value },()=> {
+      this.props.save(this.state)
+    })
+  }
+
   handleChange(e) {
     this.setState({ name: e.target.value },()=> {
+      this.props.save(this.state)
+    })
+  }
+  handleDescriptionChange(e) {
+    this.setState({ description: e.target.value },()=> {
+      this.props.save(this.state)
+    })
+  }
+  handleLocationChange(e) {
+    this.setState({ location: e.target.value },()=> {
+      this.props.save(this.state)
+    })
+  }
+  handleTopicsChange(e) {
+    this.setState({ topics: e.target.value },()=> {
       this.props.save(this.state)
     })
   }
@@ -25,7 +46,7 @@ class UserGroupForm extends FormValidation {
     })
   }
   handleLanguageChange(e) {
-    this.setState({ language: { id: e.target.value } },()=> {
+    this.setState({ userLanguage: { id: e.target.value } },()=> {
       this.props.save(this.state)
     })
   }
@@ -40,11 +61,15 @@ class UserGroupForm extends FormValidation {
   		 <Alert bsStyle={(this.props.reducer.get('visualizationType') === 'remove') ? 'danger': 'info'} >
           <p>ID: { this.props.row.get('id') }</p> 
           <p>Name: { this.props.row.get('name') }</p> 
+          <p>Description: { this.props.row.get('description') }</p> 
+          <p>Location: { this.props.row.get('location') }</p> 
+          <p>Topics: { this.props.row.get('topics') }</p> 
+          <p>Link: { this.props.row.get('link') }</p> 
           <p>User Id: { this.props.row.get('user').get('id') }</p> 
           <p>User Name: { this.props.row.get('user').get('name') }</p> 
           <p>User Email: { this.props.row.get('user').get('email') }</p> 
           <p>Platform: { this.props.row.get('platform').get('name') }</p> 
-          <p>Language: { this.props.row.get('language').get('name') }</p> 
+          <p>Language: { this.props.row.get('userLanguage').get('name') }</p> 
         </Alert>
   	)
   }
@@ -135,6 +160,68 @@ class UserGroupForm extends FormValidation {
               <HelpBlock>Validation is based on string length more than 5 caracters.</HelpBlock>
             </FormGroup>
 
+
+            <FormGroup
+              controlId="formBasicText"
+              validationState={this.getValidationStringState(this.props.row.get('description'))}
+            >
+              <ControlLabel>Full Description</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.props.row.get('description')}
+                placeholder="Enter full description"
+                onChange={this.handleDescriptionChange.bind(this)}
+              />
+              <FormControl.Feedback />
+              <HelpBlock>Validation is based on string length more than 5 caracters.</HelpBlock>
+            </FormGroup>
+
+            <FormGroup
+              controlId="formBasicText"
+              validationState={this.getValidationStringState(this.props.row.get('location'))}
+            >
+              <ControlLabel>Full location</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.props.row.get('location')}
+                placeholder="Enter full location"
+                onChange={this.handleLocationChange.bind(this)}
+              />
+              <FormControl.Feedback />
+              <HelpBlock>Validation is based on string length more than 5 caracters.</HelpBlock>
+            </FormGroup>
+
+
+            <FormGroup
+              controlId="formBasicText"
+              validationState={this.getValidationStringState(this.props.row.get('topics'))}
+            >
+              <ControlLabel>Full topics</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.props.row.get('topics')}
+                placeholder="Enter full topics"
+                onChange={this.handleTopicsChange.bind(this)}
+              />
+              <FormControl.Feedback />
+              <HelpBlock>Validation is based on string length more than 5 caracters.</HelpBlock>
+            </FormGroup>
+
+            <FormGroup
+              controlId="formBasicText"
+              validationState={this.getValidationStringState(this.props.row.get('link'))}
+            >
+              <ControlLabel>Link</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.props.row.get('link')}
+                placeholder="Enter full link"
+                onChange={this.handleLinkChange.bind(this)}
+              />
+              <FormControl.Feedback />
+              <HelpBlock>Validation is based on string length more than 5 caracters.</HelpBlock>
+            </FormGroup>
+
             <FormGroup
               controlId="formBasicText"
               validationState={this.getValidationStringState(this.props.row.get('user').get('id'))}
@@ -152,12 +239,12 @@ class UserGroupForm extends FormValidation {
 
             <FormGroup
               controlId="formBasicText"
-              validationState={this.getValidationStringState(this.props.row.get('language').get('id'))}
+              validationState={this.getValidationStringState(this.props.row.get('userLanguage').get('id'))}
             >
               <ControlLabel>Language ID</ControlLabel>
               <FormControl
                 type="text"
-                value={this.props.row.get('language').get('id')}
+                value={this.props.row.get('userLanguage').get('id')}
                 placeholder="Enter Language ID"
                 onChange={this.handleLanguageChange.bind(this)}
               />
@@ -185,11 +272,15 @@ class UserGroupForm extends FormValidation {
                   <h4>Oh yeah! New UserGroup created succefully!</h4>
                   <p>ID: { this.props.lastRow.get('id') }</p> 
                   <p>Name: { this.props.lastRow.get('name') || null}</p> 
+                  <p>Description: { this.props.lastRow.get('description') }</p> 
+                  <p>Location: { this.props.lastRow.get('location') }</p> 
+                  <p>Topics: { this.props.lastRow.get('topics') }</p> 
+                  <p>Link: { this.props.lastRow.get('link') }</p> 
                   <p>User Id: { this.props.lastRow.get('user').get('id') || null }</p> 
                   <p>User Name: { this.props.lastRow.get('user').get('name') || null }</p> 
                   <p>User Email: { this.props.lastRow.get('user').get('email')  || null}</p> 
                   <p>Platform: { this.props.lastRow.get('platform').get('name') || null }</p> 
-                  <p>Language: { this.props.lastRow.get('language').get('name')  || null}</p> 
+                  <p>Language: { this.props.lastRow.get('userLanguage').get('name')  || null}</p> 
                 </Alert>: null
             }
             {

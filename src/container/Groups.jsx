@@ -19,6 +19,7 @@ class Groups extends Component {
         ]}
       location={this.props.location}
       header={this.props.header}
+      User={this.props.User}
       show_mobile_menu={this.props.show_mobile_menu} />
 	);
   }
@@ -29,6 +30,7 @@ class Groups extends Component {
 function mapStateToProps(state) {
   return {
     header : state.header
+      ,  User : state.UserAdmin
   }
 }
 

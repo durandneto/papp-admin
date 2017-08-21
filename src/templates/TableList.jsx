@@ -27,12 +27,12 @@ class TableActionTemplate extends Component {
       , header
       , show_mobile_menu
       , location
+      , User
     } = this.props
-
 
     return (
       	<Grid fluid={true}>
-        	<Header data={header} show_mobile_menu={show_mobile_menu}/>
+        	<Header data={header} show_mobile_menu={show_mobile_menu} User={User} />
           <Content location={location} >
             <Row>    
               <Col md={12}>

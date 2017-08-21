@@ -41,6 +41,7 @@ class Topics extends Component {
 				search={this._search.bind(this)}
 				updateSearchTerm={this.props.update_search_term.bind(this)}
 				remove={this._remove.bind(this)}
+				User={this.props.User}
 				location={this.props.location}
 				header={this.props.header}
 				show_mobile_menu={this.props.show_mobile_menu} 
@@ -56,6 +57,7 @@ function mapStateToProps(state) {
   return {
     header: state.header
     , ListTopics: state.ListTopics
+    ,  User : state.UserAdmin
   }
 }
 

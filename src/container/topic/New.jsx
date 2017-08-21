@@ -21,19 +21,22 @@ class NewTopic extends Component {
   render() {
   	return (
   		<Home
-  			header={this.props.header}
+        header={this.props.header}
+  			User={this.props.User}
   			show_mobile_menu={this.props.show_mobile_menu} >
 
         <TopicForm
           reducer={this.props.ListTopics}
 
           row={this.props.ListTopics.get('newRow')}
+          avatar={this.props.ListTopics.get('avatar')}
           lastRow={this.props.ListTopics.get('lastRow')}
           status={this.props.ListTopics.get('status')}
           
           hide_message={this.props.hide_message}
           save={this.props.new_row.bind(this)}
           set_page_type={this.props.set_page_type}
+          set_avatar_topic={this.props.set_avatar_topic}
           submit={this.props.create_new.bind(this)}
           remove={this.props.remove.bind(this)}
          />
@@ -48,6 +51,7 @@ function mapStateToProps(state) {
   return {
     header : state.header
     , ListTopics: state.ListTopics
+    ,  User : state.UserAdmin
   }
 }
 

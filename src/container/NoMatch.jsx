@@ -20,6 +20,7 @@ class App extends Component {
 
 
 function mapStateToProps(state) {
+  
   return {
     header : state.header
   }

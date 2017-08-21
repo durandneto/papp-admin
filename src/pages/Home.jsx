@@ -6,7 +6,7 @@ class Home extends Component {
 
   render() {
     return (
-		<TemplateHome header={this.props.header} show_mobile_menu={this.props.show_mobile_menu} > 
+		<TemplateHome {...this.props}> 
 			{ this.props.children }
 		</TemplateHome>
 )

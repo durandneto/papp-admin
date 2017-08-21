@@ -43,12 +43,15 @@ let defaultState = Immutable.fromJS({
 	}
 	, newRow: {
 		name: null
+		, desciption: null
+		, location: null
+		, topics: null
 		, user: {
 			id: null
 			, name: null
 			, email: null
 		}
-		, language: {
+		, userLanguage: {
 			id: null
 			, name: null
 		}
@@ -59,13 +62,16 @@ let defaultState = Immutable.fromJS({
 	}
 	, lastRow: {
 		name: null
+		, desciption: null
+		, location: null
+		, topics: null
 		, id: -1
 		, user: {
 			id: null
 			, name: null
 			, email: null
 		}
-		, language: {
+		, userLanguage: {
 			id: null
 			, name: null
 		}
@@ -76,13 +82,16 @@ let defaultState = Immutable.fromJS({
 	}
 	, selectedRow: {
 		name: null
+		, desciption: null
+		, location: null
+		, topics: null
 		, id: -1
 		, user: {
 			id: null
 			, name: null
 			, email: null
 		}
-		, language: {
+		, userLanguage: {
 			id: null
 			, name: null
 		}
@@ -143,7 +152,7 @@ function appReducer (state = defaultState, action) {
 		})
 		resetRow.user = {id:null}
 		resetRow.platform = {id:null}
-		resetRow.language = {id:null}
+		resetRow.userLanguage = {id:null}
 
 		return state.merge({
 			isSaving: false

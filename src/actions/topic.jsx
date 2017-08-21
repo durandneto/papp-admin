@@ -14,6 +14,7 @@ export const UPDATED = Symbol('UPDATED')
 export const DELETED = Symbol('DELETED')
 export const UPDATE_SEARCH_TERM = Symbol('UPDATE_SEARCH_TERM')
 export const DELETED_ERROR = Symbol('DELETED_ERROR')
+export const SET_UPLOAD_TOPIC_AVATAR = Symbol('SET_UPLOAD_TOPIC_AVATAR')
 
 export function set_page(page, allowNavigation){
   return (dispatch) => {
@@ -24,6 +25,15 @@ export function set_page(page, allowNavigation){
     })
   }
 }
+
+export function set_avatar_topic(file){ 
+  console.log('set_avatar_topicset_avatar_topicset_avatar_topicset_avatar_topicset_avatar_topicset_avatar_topicset_avatar_topicset_avatar_topic')
+  return {
+    type: SET_UPLOAD_TOPIC_AVATAR,
+    file
+  }
+}
+
 export function fetch(topics, action) {
 
   let limit = topics.get('paginator').get('limitPerPage')
@@ -32,93 +42,93 @@ export function fetch(topics, action) {
   let term = topics.get('searchTerm')
   let search = true
   let allowNavigation = {
-      next : true
-      , prev : false
-    }
+  next : true
+  , prev : false
+  }
 
   switch(true){
-    case action === 'next':
-      allowNavigation.prev = (page < total)
-      page ++
-      allowNavigation.next = (page < total)
-      search = (page <= total)
-      break
-    case action === 'prev':
-      page --
-      allowNavigation.next = ( page <= total )
-      allowNavigation.prev = ( page > 1 )
-      search = (page >= 1)
-      break
-      // eslint-disable-next-line
-      search = (page !== total)
-    case action === 'first':
+  case action === 'next':
+  allowNavigation.prev = (page < total)
+  page ++
+  allowNavigation.next = (page < total)
+  search = (page <= total)
+  break
+  case action === 'prev':
+  page --
+  allowNavigation.next = ( page <= total )
+  allowNavigation.prev = ( page > 1 )
+  search = (page >= 1)
+  break
+  // eslint-disable-next-line
+  search = (page !== total)
+  case action === 'first':
 
-      page = 1
-      search = (page !== total)
-      if ( search ) {
-        allowNavigation.prev = false
-        allowNavigation.next = true
-      } else{
-        allowNavigation.prev = false
-        allowNavigation.next = false
-      }
+  page = 1
+  search = (page !== total)
+  if ( search ) {
+    allowNavigation.prev = false
+    allowNavigation.next = true
+  } else{
+    allowNavigation.prev = false
+    allowNavigation.next = false
+  }
 
-      break
-    case action === 'last':
-      search = (page !== total)
-      if ( search ) {
-        page = total
-        allowNavigation.prev = true
-        allowNavigation.next = false
-      } else{
-        allowNavigation.prev = false
-        allowNavigation.next = false
-      }
+  break
+  case action === 'last':
+  search = (page !== total)
+  if ( search ) {
+    page = total
+    allowNavigation.prev = true
+    allowNavigation.next = false
+  } else{
+    allowNavigation.prev = false
+    allowNavigation.next = false
+  }
 
-      break
-    case action === 'search':
-      page = 1
-      break
-    default:
+  break
+  case action === 'search':
+  page = 1
+  break
+  default:
   }
 
   return (dispatch) => {
 
-    if(search){
-      dispatch(
-        {
-          [CHAIN_API]: [
-            ()=> {
-              return {
-                [CALL_API]: {
-                  method: 'get',
-                  type : 'external',
-                  path: '/topic/search?limit=' + limit
-                  + '&page='+ page
-                  + '&name='+ term,
-                  successType: SEARCHED
-                }
-              }
-            },
-              (response) => {
+  if(search){
+  dispatch(
+    {
+      [CHAIN_API]: [
+        ()=> {
+          return {
+            [CALL_API]: {
+              method: 'get',
+              type : 'external',
+              path: '/topic/search?limit=' + limit
+              + '&page='+ page
+              + '&name='+ term,
+              successType: SEARCHED
+            }
+          }
+        },
+          (response) => {
 
-                return {
-                  [CALL_API]: {
-                    method: 'get',
-                    type : 'external', 
-                    path: '/topic/count?name='+term,
-                    successType: SEARCHED_COUNT,
-                    
-                  }
-                }
+            return {
+              [CALL_API]: {
+                method: 'get',
+                type : 'external', 
+                path: '/topic/count?name='+term,
+                successType: SEARCHED_COUNT,
+                
               }
-          ]
-        }
-      )
-      dispatch(set_page(page, allowNavigation))
-    } else{
-      dispatch(set_page(1, allowNavigation))
+            }
+          }
+      ]
     }
+  )
+  dispatch(set_page(page, allowNavigation))
+  } else{
+  dispatch(set_page(1, allowNavigation))
+  }
   }
 }
 export function is_saving(isSaving){
@@ -130,10 +140,10 @@ export function is_saving(isSaving){
 export function select(selectedRow){
 
   return (dispatch) =>{
-    dispatch({
-      type: SELECT
-      , selectedRow
-    })   
+  dispatch({
+  type: SELECT
+  , selectedRow
+  })   
   }
 }
 export function update_search_term(term){
@@ -143,7 +153,6 @@ export function update_search_term(term){
     }
 }
 export function new_row(newRow){
-  console.log(newRow)
    return  {
       type: NEW
       , newRow
@@ -173,7 +182,20 @@ export function create_new(topic) {
               }
             }
           }, (response) => {
-            console.log(response)
+            console.log('create_newcreate_newcreate_newcreate_newcreate_newcreate_newcreate_newcreate_new',getState().ListTopics.get('avatar'))
+            // user 58c6912d3733f428d048d0a9
+            var formData = new FormData();
+            formData.append('avatar', getState().ListTopics.get('avatar') );
+            formData.append('id', response.row.id);
+
+            return {
+              [CALL_API]: {
+                method: 'post',
+                type : 'external',
+                body : formData,
+                path: '/topic/set-avatar'
+              }
+            }
           }
         ]
     })
@@ -215,7 +237,7 @@ export function update(topic) {
               [CALL_API]: {
                 method: 'put',
                 type : 'external',
-                body: {id: selectedRow.get('id'),name: selectedRow.get('name'), user: selectedRow.get('user').get('id')},
+                body: {id: selectedRow.get('id'),name: selectedRow.get('name'),color: selectedRow.get('color'), user: selectedRow.get('user').get('id')},
                 path: '/topic/update',
                 header: { 'api-key-papp': selectedRow.get('id')},
                 successType: UPDATED,
@@ -223,7 +245,7 @@ export function update(topic) {
               }
             }
           }, (response) => {
-            console.log(response)
+            console.log('update topic.jsx',response.row.id)
           }
         ]
     })
